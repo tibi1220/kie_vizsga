@@ -17,37 +17,201 @@
 
     \item a \kkod{NAND} és a \kkod{NOR} önmagukban képesek
     az összeset előállítani
+  \end{itemize}
 
+  \fogalom{Logikai kapuk}
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}[american]
+      \ctikzset{american or shape=roundy}
+
+      \node [and port](myand) at (0,0) {};
+      \node [below=4pt] (andnode) at (myand.south) {\kkod{AND}};
+
+      \node [nand port](mynand) at (3,0) {};
+      \node [below=4pt] (nandnode) at (mynand.south) {\kkod{NAND}};
+
+      \node [or port](myor) at (6,0) {};
+      \node [below=4pt] (ornode) at (myor.south) {\kkod{OR}};
+
+      \node [nor port](mynor) at (9,0) {};
+      \node [below=4pt] (nornode) at (mynor.south) {\kkod{NOR}};
+
+      \node [xor port](myxor) at (12,0) {};
+      \node [below=4pt] (xornode) at (myxor.south) {\kkod{XOR}};
+
+      \node [not port](mynot) at (-3,0) {};
+      \node [below=4pt] (notnode) at (mynot.south) {\kkod{NOT}};
+    \end{circuitikz}
+  \end{figure}
+  
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        $in$ & $out$
+        \\ \hline \hline
+        0 & 1
+        \\ \hline
+        1 & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $out$
+        \\ \hline \hline
+        0 & 0 & 0
+        \\ \hline
+        0 & 1 & 0
+        \\ \hline
+        1 & 0 & 0
+        \\ \hline
+        1 & 1 & 1
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $out$
+        \\ \hline \hline
+        0 & 0 & 1
+        \\ \hline
+        0 & 1 & 1
+        \\ \hline
+        1 & 0 & 1
+        \\ \hline
+        1 & 1 & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $out$
+        \\ \hline \hline
+        0 & 0 & 0
+        \\ \hline
+        0 & 1 & 1
+        \\ \hline
+        1 & 0 & 1
+        \\ \hline
+        1 & 1 & 1
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $out$
+        \\ \hline \hline
+        0 & 0 & 1
+        \\ \hline
+        0 & 1 & 0
+        \\ \hline
+        1 & 0 & 0
+        \\ \hline
+        1 & 1 & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.166\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $i_1$ & $i_2$ & $out$
+        \\ \hline \hline
+        0 & 0 & 0
+        \\ \hline
+        0 & 1 & 1
+        \\ \hline
+        1 & 0 & 1
+        \\ \hline
+        1 & 1 & 0
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  
+  \fogalom{Kombinációs logikai hálózatok}
+  \zkod{Kombinációs logikai hálózatok} esetén a
+  kimeneti jelek értékei csak a bemeneti jelek
+  pillanatnyi értékétől függenek. A kimenetek
+  egy-egy függvénykapcsolattal írhatóak le.
+
+  \vspace{1em}
+  {\large \zkod{Félösszeadó}:}
+
+  \begin{minipage}[c]{0.3\textwidth}
     \begin{figure}[H]
       \centering
       \begin{circuitikz}[american]
         \ctikzset{american or shape=roundy}
   
-        \node [and port](myand) at (0,0) {};
-        \node [below=4pt] (andnode) at (myand.south) {\kkod{AND}};
-
-        \node [nand port](mynand) at (2,0) {};
-        \node [below=4pt] (nandnode) at (mynand.south) {\kkod{NAND}};
-
-        \node [or port](myor) at (4,0) {};
-        \node [below=4pt] (ornode) at (myor.south) {\kkod{OR}};
-
-        \node [nor port](mynor) at (6,0) {};
-        \node [below=4pt] (nornode) at (mynor.south) {\kkod{NOR}};
-
-        \node [xor port](myxor) at (8,0) {};
-        \node [below=4pt] (xornode) at (myxor.south) {\kkod{XOR}};
-
-
+        \draw (0, 4)node[xor port] (xorone){}
+        (0, 2)node[and port] (and){}
+        (xorone.in 1) node[left=1cm](a) {A}
+        (xorone.in 2) node[left=1cm](b) {B}
+        (xorone.out) node[right=.5cm](s) {S}
+        (and.out) node[right=.5cm](c) {C}
+  
+        (a.east) to[short,-*] (xorone.in 1) |- (and.in 1)
+        (b.east) to[short,-*] ($(b.east)!.5!(xorone.in 2)$) coordinate (branch) -- (xorone.in 2)
+        (c.west) to (and.out)
+        (s.west) to (xorone.out)
+        (branch) |- (and.in 2);  
       \end{circuitikz}
     \end{figure}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.2\textwidth}
+    \vspace{1.5em}
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|}
+        \hline
+        $A$ & $B$ & $S$ & $C$
+        \\ \hline \hline
+        0 & 0 & 0 & 0
+        \\ \hline
+        0 & 1 & 1 & 0
+        \\ \hline
+        1 & 0 & 1 & 0
+        \\ \hline
+        1 & 1 & 0 & 1
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{itemize}
+      \vspace{1.5em}
+      \item egy \kkod{XOR} és \kkod{AND} kapuval megvalósítható
+      
+      \item feladata 2 bit összeadása
+      
+      \item $S = \overline{A}B + A\overline{B}$
+      \tabto{3.2cm} – \tabto{4cm} összeg
+      
+      \item $C = AB$
+      \tabto{3.2cm} – \tabto{4cm} maradék (carry)
+    \end{itemize}
+  \end{minipage}\hfill
 
-  \end{itemize}
+  \vspace{2em}
+  {\large \zkod{Teljes összeadó}:}
+  
 
-  \fogalom{Logikai kapuk}
-  lorem
-  \fogalom{Kombinációs logikai hálózatok}
-  lorem
+
   \fogalom{Szekvenciális logikai hálózatok}
   lorem
   \fogalom{Flip-flop}
