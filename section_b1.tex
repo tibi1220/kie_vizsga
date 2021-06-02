@@ -108,7 +108,7 @@
     \item a \zkod{kétirányó listák} mindkét irányban bejárhatóak
     
     \item a \zkod{ciklikusan kapcsolt listák} nem rendelkeznek
-    első és utolsó elemmel, hiszen az első az utolsóra mutat
+    első és utolsó elemmel, hiszen az "első" az "utolsóra" mutat
   \end{itemize}
 
   \fogalom{Gráf}
@@ -226,7 +226,7 @@
       \item megoldás \zkod{Kruskal algoritmus}sal, amely Egy
       \zkod{mohó} algoritmus
       \begin{itemize}
-        \item minden pillanatban a leghatékonyabb megoldást válassza ki
+        \item[$\circ$] minden pillanatban a leghatékonyabb megoldást válassza ki
       \end{itemize}
     \end{itemize}
   \end{itemize}
@@ -278,7 +278,7 @@
 
     \item a \zkod{quick sort} bonyolultsága: $n \cdot \log_2(n)$
     \begin{itemize}
-      \item felezgetős keresés for ciklussal
+      \item felezgetős keresés \kkod{for} ciklussal
     \end{itemize}
   \end{itemize}
 
@@ -392,7 +392,7 @@
     \item \zkod{DDL} – új adatok létrehozása adatdefiníciós
     nyelv segítségével
     
-    \item \zkod{SQR} – meglévő adatok lekérdezése, módosítása
+    \item \zkod{SQL} – meglévő adatok lekérdezése, módosítása
     lekérdező vagy adatmanipulációs nyelvvel
 
     \item támogassa az adatok \zkod{hosszú távú},
@@ -448,7 +448,7 @@
 
   \fogalom{Egyed-kapcsolat modell}
   \begin{itemize}
-    \item az \zkod{ETK adatmodell} a fenti három fogalom együttese
+    \item az \zkod{ETK adatmodell} a lenti három fogalom együttese
     
     \item \zkod{egyed} – az információs rendszert
     felépítő személyek, tárgyak, események 
@@ -566,7 +566,7 @@
   gráfokkal írhatóak le, ahol a csomópontokat élekkel
   kötjük össze. Csak a tárolt kapcsolat mentén járható be.
   A modellel egy a többhöz (\zkod{1-N}) és több a többhöz 
-  (\zkod{N-M}) kapcsolatot és leírrhatunk.
+  (\zkod{N-M}) kapcsolatot és leírhatunk.
 
   \fogalom{Reláció jellemzői}
   
@@ -588,7 +588,7 @@
     \item \zkod{attribútum} \tabto{2.5cm} – \tabto{3.2cm}
     a táblázat oszlopaiú
 
-    \item \zkod{mező} \tabto{2.5cm} – \tabto{3.2cm} a
+    \item \zkod{mező} \tabto{2.5cm} – \tabto{3.2cm}
     a sorok és oszlopok metszetei
   \end{itemize}
 
@@ -634,7 +634,7 @@
       \item \zkod{kiterjesztés} \\
       \tabto{5mm} matematikai műveletekkel új oszlop
 
-      \item \zkod{szelekció} (kiválasztás) \\
+      \item \zkod{csoportosítás} \\
       \tabto{5mm} attribútumok alapján csoport, \\
       \tabto{5mm} majd hozzá érték
     \end{itemize}
@@ -661,12 +661,12 @@
   Amennyiben egyetlen attribútumból áll, akkor \zkod{egyszerű},
   egyébként \zkod{összetett}.
   Megadható több kulcs is, amire szükségünk van az adott
-  deladatnál, azt \zkod{elsődleges} kulcsnak nevezzük,
+  feladatnál, azt \zkod{elsődleges} kulcsnak nevezzük,
   a többi mind \zkod{másodlagos}. \zkod{Idegen} kulcs egy
   reláció olyan attribútumai, melyek egy másikban elsődlegesek.
 
   \fogalom{SQL alapok}
-  Hogy elkerüljük at \zkod{anomáliá}kat, az adatbázisokat
+  Hogy elkerüljük az \zkod{anomáliá}kat, az adatbázisokat
   \zkod{normalizálni} szokták. Ennek lényege, hogy a
   változtatási anomáliák megszűnjenek. (módosítási, beírási,
   törlési) A normalizálásnak több szintje létezik.
@@ -675,8 +675,8 @@
   \begin{itemize}
     \item \zkod{1. normál forma}
     \begin{itemize}
-      \item ha a mezőé függéseinek rendszerében
-      lérezik egy olyan kulcs, amelytől minden
+      \item ha a mezők függéseinek rendszerében
+      létezik egy olyan kulcs, amelytől minden
       más mező függ, azaz minden mezője 
       funkcionálisan függ a kulcsmező csoporttól
     \end{itemize}
@@ -692,7 +692,7 @@
     \begin{itemize}
       \item nem áll fenn tranzitív függőség, azaz
       a nem kulcs mezők nem függnek egymástól,
-      tehát nincs funkcionális függőség a nem
+      tehát nincs funkcionális függőség a \pkod{nem}
       elsődleges attribútumok között.
     \end{itemize}
   \end{itemize}
@@ -755,14 +755,14 @@
     \nkod{rekord tőrlése}
 
     \item \kkod{UPDATE} \fkod{table\textunderscore{}name}
-    \kkod{SET} \fkod{field=value,\dots}\kkod{WHERE} \fkod{cond;}
+    \kkod{SET} \fkod{field=value,\dots} \kkod{WHERE} \fkod{cond;}
     \\ \hspace*{\fill}
     \nkod{rekord módosítása}
   \end{itemize}
 
   {\large \zkod{Adatok lekérdezése}}:
   \begin{itemize}
-    \item \kkod{SELECT} \fkod{coulomn1, column2, \dots}
+    \item \kkod{SELECT} \fkod{culomn1, column2, \dots}
     \kkod{FROM} \fkod{table\textunderscore{}name1, table\textunderscore{}name,}
     \kkod{WHERE} \fkod{cond;}
   
@@ -790,7 +790,7 @@
     \fkod{table\textunderscore{}name1, table\textunderscore{}name2;}
     \hfill \nkod{Descartes-szorzat}
     
-    \item \kkod{SELECT} \fkod{expression coulomn,\dots}
+    \item \kkod{SELECT} \fkod{expr culomn,\dots}
     \kkod{FROM} \fkod{table\textunderscore{}name;}
     \hfill \nkod{kiterjesztés}
 
@@ -851,14 +851,14 @@
     \begin{table}[H]
       \centering\begin{tabular}{|l r|}
         \hline
-        \kkod{LIKE} \fkod{'a\%'}
-        & \kkod{'a'}-val kezdődik \\
-        \kkod{LIKE} \fkod{'x\textunderscore'}
-        & \kkod{'x'}-val kezdődik, 2 betű \\
-        \kkod{LIKE} \fkod{'\%a\%'}
-        & \kkod{'a'}-t tartalmaz \\
-        \kkod{LIKE} \fkod{'\textunderscore{}a\%x'}
-        & 2. betű \kkod{'a'}, \fkod{'x'}-re végződik \\
+        \kkod{LIKE} \zkod{'a\%'}
+        & \zkod{'a'}-val kezdődik \\
+        \kkod{LIKE} \zkod{'x\textunderscore'}
+        & \zkod{'x'}-val kezdődik, 2 betű \\
+        \kkod{LIKE} \zkod{'\%a\%'}
+        & \zkod{'a'}-t tartalmaz \\
+        \kkod{LIKE} \zkod{'\textunderscore{}a\%x'}
+        & 2. betű \zkod{'a'}, \zkod{'x'}-re végződik \\
         \hline
       \end{tabular}
     \end{table}
@@ -867,7 +867,7 @@
     \begin{table}[H]
       \centering\begin{tabular}{|l r|}
         \hline
-        \kkod{BETWEEN} \fkod{x} \kkod{AND} \fkod{y}
+        \kkod{BETWEEN}\fkod{ x }\kkod{AND}\fkod{ y}
         & \hspace{.25em} adott értékek közé esik \\
         \kkod{IN}\fkod{(a, b, c,\dots)} & értékek között van \\
         \kkod{LIKE} \fkod{sample} & hasonlít a mintára \\

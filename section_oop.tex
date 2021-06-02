@@ -241,7 +241,7 @@
   Tisztán virtuális függvényt tartalmazó osztály nem példányosítható.
   Ezeket \kkod{abstract} osztályoknak hívjuk.
   Az \kkod{interfész} olyan absztrakt osztály,
-  amely csak tisztán virtuális függvényeket és tartalmaz.
+  amely csak tisztán virtuális függvényeket tartalmaz.
 
   \fogalom{Általánosított osztályok}
   Általánosított osztályokat \kkod{template}
@@ -306,7 +306,7 @@
     };
     vector<int> numbers{2, 3, 6, 9};
     vector<int>::iterator i = find_if(
-      begin(szamok), end(szamok), Even()
+      begin(numbers), end(numbers), Even()
     );
   \end{lstlisting}
   \kkod{C++11} óta általánosított függvényobjektumok
@@ -380,7 +380,7 @@
   A \kkod{string} is \kkod{STL} tároló
   \begin{lstlisting}
     // string
-    #include<string>
+    #include <string>
 
     at(); []; front(); back(); data();
     begin(); end(); rbegin(); rend();
