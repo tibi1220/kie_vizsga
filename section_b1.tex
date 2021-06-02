@@ -1,0 +1,924 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+  \section{Tétel – A számítástudomány alapjai} %6
+
+  \fogalom{Turing gép}
+  \begin{itemize}
+    \item külső adat és tárolóterület:
+    végtelen szalag, amelynek egymás után cellái vannak,
+    amelyek vagy üresek, vagy jelöltek
+
+    \item a gép egyszerre egy cellával foglalkozik
+    (Az író/olvasó feje egy cellán áll)
+
+    \item a szalagon tud jobbra-balra lépni,
+    tud jelet olvasni, törölni és írni
+
+    \item a bevitel, a számítás és a kivitel minden
+    konkrét esetben véges marad, ezen túl a szalag üres
+
+    \item a gép belső állapotait számozzuk
+    
+    \item a gép működését megadja egy explicit helyettesítési táblázat
+    
+    \item ha egy \zkod{algoritmus} elég
+    \zkod{mechanikus} és \zkod{világos},
+    akkor található olyan Turing-gép, amely azt végrehajtja
+
+    \item a Turing gép definiálja mindazt,
+    amit matematikailag \zkod{algoritmikus eljárás} alatt értünk
+
+    \item minden más algoritmikus eljárást végrehajtó rendszer
+    \zkod{ekvivalens} valamely Turing-géppel.
+
+    \item \zkod{megállási probléma}
+    – nem tudjuk, hogy egy adott programmal megáll-e
+
+    \item \pkod{nincs} arra bizonyítási módszerünk,
+    hogy egy eljárás biztosan algoritmus
+  \end{itemize}
+
+  \fogalom{Eljárások}
+  Nem garantálható, hogy véges lépésben,
+  tehát valaha is választ kapjunk kérdésünkre.
+  
+
+  \fogalom{Algoritmusok}
+  A választ \zkod{véges számú lépés} után mindenképpen megkapjuk.
+  Egy \zkod{véges utasítássorozat}, amely bármely input esetén
+  véges lépésszám után megáll, eredményt ad.
+  Maga a Turing gép matematikai leírása az algoritmus
+  fogalmának formális definíciója.
+  Minden probléma, amelyre eljárás,
+  procedúra szerkeszthető, Turing-géppel megoldható.
+  Az ember azokra és csakis azokra a kérdésekre tud választ adni,
+  amelyekre a Turing-gép is képes.
+  A tartalmazás kérdése algoritmikusan eldönthetetlen.
+  \begin{itemize}
+    \item \zkod{bejárás} – elemek keresése
+    
+    \item \zkod{keresés} - adott értéknek megfelelő elemek kiválasztása
+    
+    \item \zkod{beszúrás} - új adat beillesztése
+    
+    \item \zkod{törlés} - adatelem eltávolítása
+    
+    \item \zkod{rendezés} - elemeket logikai sorrendbe
+    
+    \item \zkod{összeválogatás} - különböző rendezett
+    adathalmazokból új elemhalmaz kialakítása
+
+
+  \end{itemize}
+
+
+
+  \section{Tétel – Adatszerkezetek} %7
+  \begin{itemize}
+    \item egyszerű vagy összetett alapadatok
+    rendszerének matematikai, logikai \zkod{modellje}
+
+    \item \zkod{elég jó} ahhoz, hogy tükrözze a valós kapcsolatokat
+    
+    \item \zkod{elég egyszerű} a kezeléshez
+  \end{itemize}
+
+  \fogalom{Tömbök}
+  \begin{itemize}
+    \item lineáris, egy vagy többdimenziós
+    
+    \item $n$ darab azonos típusú \zkod{adatelemből} áll
+    
+    \item az elemekre \zkod{indexhalmazzal} hivatkozunk
+    
+    \item az elemekhez bejárás nélkül férünk hozzá
+  \end{itemize}
+
+  \fogalom{Kapcsolt listák}
+  \begin{itemize}
+    \item a \zkod{kapcsolt lista} vagy \zkod{egyirányú lista}
+    adatelemek, vagy csomópontok lineáris gyűjteménye,
+    ahol az elemek sorrendjét rögzítjük
+    \begin{itemize}
+      \item a \zkod{mutatókat} tároló elemeket
+      \zkod{kapcsolómezőnek hívjuk}
+    \end{itemize}
+
+    \item a \zkod{kétirányó listák} mindkét irányban bejárhatóak
+    
+    \item a \zkod{ciklikusan kapcsolt listák} nem rendelkeznek
+    első és utolsó elemmel, hiszen az első az utolsóra mutat
+  \end{itemize}
+
+  \fogalom{Gráf}
+  \begin{itemize}
+    \item A \zkod{gráf} két halmazzal jellemezhető adatszerkezet
+    \begin{itemize}
+      \item a \zkod{csomópontok} sorszámozott halmazzal
+      
+      \item az elemeket összekötő számpárral jellemzett
+      \zkod{élek halmaza}
+    \end{itemize}
+
+    \item az összekötött csomópontokat \zkod{szomszéd}oknak hívjuk
+    
+    \item $\deg(u)$ a csomópont \zkod{fok}a a befutó élek száma
+    \begin{itemize}
+      \item ha $\deg(u) = 0$, akkor a csomópont \zkod{izolált}
+    \end{itemize}
+
+    \item a $v_0$-ból $v_n$-be mutató élek halmazát
+    \zkod{út}nak nevezzük – $P \left( v_0; v_1; \dots ;v_n \right)$
+    \begin{itemize}
+      \item az út \zkod{zárt}, ha $v_0 = v_n$
+      \item az út \zkod{egyszerű}, ha minden pontja különbözik
+      \item az út \zkod{kör}, ha legalább 3 hosszú, egyszerű
+    \end{itemize}
+
+    \item egy $G$ gráf \zkod{összefüggő},
+    ha bármely 2 pontja között létezik egyszerű út
+
+    \item egy $G$ gráf \zkod{teljes},
+    ha minden csomópontja minden csomópontjával össze van kötve.
+
+    \item egy $G$ gráf \zkod{címkézett},
+    ha éleihez adatokat rendelünk
+    \begin{itemize}
+      \item egy $G$ gráf \zkod{súlyozott},
+      ha éleihez rendelt adatok nemnegatívak
+    \end{itemize}
+
+    \item egy $G$ gráf \zkod{irányított},
+    ha az éleknek irányítottságuk van
+
+    \item rendelhetünk hozzájuk mátrixokat:
+    \begin{itemize}
+      \item \zkod{szomszédsági mátrix} – $a_{ij} = 1$,
+      ha $i$-ből $j$ felé halad él 
+      
+      \item \zkod{útmátrix} – $a_{ij} = 1$,
+      ha $i$-ből $j$-be halad valamilyen út 
+    \end{itemize}
+  \end{itemize}  
+  
+  \fogalom{Fa}
+  \begin{itemize}
+    \item a \zkod{fa} köröket nem tartalmazó összefüggő gráf
+    
+    \item a \zkod{bináris fa} elemek véges halmaza, mely:
+    \begin{itemize}
+      \item vagy üres
+      
+      \item vagy egyetlen $\mathbf{T}$ elemhez (\zkod{gyökér})
+      kapcsolt két diszjunkt $\mathbf{T1}$ és $\mathbf{T2}$
+      részfa alkotja (\zkod{szukcesszor})
+
+      \item a \zkod{zárócsomópont}nak nincsen szukcesszora
+      (\zkod{levél}), az utolsó élet \zkod{ág}nak nevezzük
+      
+      \item egy \zkod{generáció}ba az azonos
+      \zkod{szintszámú} elemek tartoznak
+      (gyökér szintszáma 0)
+      
+      \item a \zkod{mélység} az azonos ágon elhelyezkedő
+      elemek maximális száma
+      
+      \item \zkod{teljes}, ha az utolsó szintet kivéve
+      a csomópontok száma maximális
+
+      \item ábrázolhatóak:
+      \begin{itemize}
+        \item[$\circ$] kapcsolt szerkezettel
+        \item[$\circ$] tömbökkel
+        \item[$\circ$] szekvenciálisan ($2k$ helyek eltolva)
+      \end{itemize}
+
+      \item bejárás történhet pl. irányítás szerint
+    \end{itemize}
+
+    \item \zkod{általános fa} esetén
+    nem csak 2 szukcesszor engedélyezett
+    \begin{itemize}
+      \item elemek véges halmata ($\mathbf{T}$), amely \dots
+      \begin{itemize}
+        \item[$\circ$] tartalmaz egy kitüntetett
+        $\mathbf{R}$ gyökérelemet
+        \item[$\circ$] a többi elem nem nulla diszjunkt
+        részfája $\mathbf{T}$-nek
+      \end{itemize}
+    \end{itemize}
+    
+    \item \zkod{minimális feszítőfa probléma}
+    (minimum spanning tree)
+    \begin{itemize}
+      \item minden csúcsot érintő, összefüggő,
+      körmentes élhalmaz
+
+      \item \fkod{bemenet:} összefüggő, súlyozott,
+      irányítatlan $G = (V; E)$ gráf, ahol $k(u; v)$
+      a súly, az $(u;v)$ az élköltséget fejezi ki
+
+      \item \fkod{kimenet:} egy $\mathbf{F}$ feszítőfa,
+      melyre az élköltség minimális:
+      $k(\mathbf{F}) = \displaystyle\sum_{(u;v) \in \mathbf{F}} k(u;v)$
+      
+      \item megoldás \zkod{Kruskal algoritmus}sal, amely Egy
+      \zkod{mohó} algoritmus
+      \begin{itemize}
+        \item minden pillanatban a leghatékonyabb megoldást válassza ki
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+
+  \fogalom{Verem}
+  \begin{itemize}
+    \item a \zkod{verem} (\kkod{stack}) \textit{LIFO}
+    típusú tároló.
+
+    \item \kkod{push} és \kkod{pop} függvényekkel rendelkezik
+  \end{itemize}
+
+  \fogalom{Sor}
+  \begin{itemize}
+    \item a \zkod{sor} (\zkod{queue}) \textit{FIFO}
+    típusú tároló.
+
+    \item \kkod{push} és \kkod{pop} függvényekkel rendelkezik
+  \end{itemize}
+
+
+
+  \section{Tétel – Algoritmusok} %8
+  
+  \fogalom{Bejárás}
+  \begin{itemize}
+    \item Tömb bejárása \kkod{for} ciklussal lehetséges.
+  \end{itemize}
+  
+  \fogalom{Keresés}
+  \begin{itemize}
+    \item a \zkod{szekvenciális keresés} bonyolultsága: $O(n)$
+    \begin{itemize}
+      \item sima \kkod{for} ciklusos keresés
+    \end{itemize}
+
+    \item a \zkod{bináris keresés} bonyolultsága: $\log_2(n)$
+    \begin{itemize}
+      \item rendezett minta felezéses keresése
+    \end{itemize}
+  \end{itemize}
+
+  \fogalom{Rendezés}
+  \begin{itemize}
+    \item a \zkod{buborék rendezés} bonyolultsága: $O(n^2)$
+    \begin{itemize}
+      \item dupla \kkod{for} ciklusos rendezés $\binom{n}{2}$
+    \end{itemize}
+
+    \item a \zkod{quick sort} bonyolultsága: $n \cdot \log_2(n)$
+    \begin{itemize}
+      \item felezgetős keresés for ciklussal
+    \end{itemize}
+  \end{itemize}
+
+  \fogalom{Algoritmusok bonyolultsága}
+  \begin{itemize}
+    \item $P$ a \zkod{polinomidőben megoldható} problémákat reprezentálja
+    \begin{itemize}
+      \item a gyakorlatban hatékonyan megoldható problémák osztálya
+    \end{itemize}
+
+    \item $NP$ a \zkod{polinomidőben verifikálható} problémák osztálya
+    \begin{itemize}
+      \item a lehetséges megoldások polinomidőben előállíthatók
+      nemdeterminisztikus Turing-géppel,
+      majd determinisztikusan polinomidőben ellenőrizhető az,
+      hogy az előállított lehetséges megoldás valóban megoldás-e
+    \end{itemize}
+
+    \item megoldatlan probléma: $N \overset{?}{=} NP$
+    
+    \item \zkod{utazó ügynök probléma}
+    \begin{itemize}
+      \item célja a legkisebb költségű út megtalálása városok között,
+      minden várost pontosan egyszer érintve és visszatérve a
+      kiindulási pontba
+
+      \item a városok közötti költség az Euklideszi távolságon alapul,
+      a probléma szimmetrikus, a költségek konstansok
+    \end{itemize}
+
+    \item $B(n)$ – \zkod{bonyolultság}
+  \end{itemize}
+
+  \fogalom{Rekurzió}
+  \begin{itemize}
+    \item rekurzió esetén a függvényben, általában
+    a visszatérésénél meghívjuk saját magát.
+
+    \item rekurzivan megoldható problémák:
+    \begin{itemize}
+      \item a faktoriális
+      \begin{lstlisting}
+        int factorial(int n){
+          if(n == 0) return 1;
+          return n * factorial(n-1);
+        }
+      \end{lstlisting}
+
+      \item az aranymetszés
+      \begin{lstlisting}
+        int golden_ratio(int n){
+          if(n == 1 || n == 2) return 1;
+          return golden_ratio(n-1) + golden_ratio(n-2)
+        }
+      \end{lstlisting}
+
+      \item Hanoi tornyai
+      \begin{lstlisting}
+        void hanoi(int n, char from, char to, char tmp){
+          if(n == 1){
+            cout << "\nTedd at az 1. lemezt a(z) "
+                 << from << "rudrol a(z)" << to << " rudra.";
+          }
+          hanoi(n-1, from, tmp, to);
+          cout << "\nTedd at a(z) " << n << " lemezt a(z) "
+               << from << "rudrol a(z)" << to << " rudra.";
+          hanoi(n-1, tmp, to, from);
+        }
+      \end{lstlisting}
+    \end{itemize}
+  \end{itemize}
+
+
+
+  \section{Tétel – Az adatbázisok alapjai} %9
+  
+  \fogalom{Adatbázis}
+  \begin{itemize}
+    \item \zkod{adatok} – nyers tények, feldolgozatlan információ
+    
+    \item \zkod{információ} – feldolgozott adat
+    \begin{itemize}
+      \item információs rendszerek hozzák létre,
+      keresik vissza, dolgozzák fel.
+    \end{itemize}
+
+    \item az adatok és információk közötti különbség
+    nem strukturális, hanem \zkod{funkcionális}
+    
+    \item az \zkod{adatbázis} adatok gyűjteménye,
+    amelyet egy adatbázis-kezelő rendszer kezel, tehát
+    nemcsak az adatok rendezett tátolását, hanem azok
+    kezelését is lehetővé teszi, mert kapcsolatok nélkül
+    az adatok eltérően értelmezhetőek
+
+    \item az eltárolt adatok struktúrája a
+    kezelő rendszer együttese
+
+    \item az adatok között meghatározott kapcsolatok vannak
+    
+    \item alapfunkciók: \zkod{létrehozás}, adatok \zkod{mentés}e,
+    \zkod{lekérdezések}, \zkod{adatvédelem}
+
+    \item a \zkod{DBMS} segítségével lehetséges a tárolt adatok
+    \zkod{definiálás}a, \zkod{kezelés}e,
+    \zkod{karbantartás}a, \zkod{felügyelet}e
+  \end{itemize}
+
+  \fogalom{Követelmények}
+  \begin{itemize}
+    \item \zkod{DDL} – új adatok létrehozása adatdefiníciós
+    nyelv segítségével
+    
+    \item \zkod{SQR} – meglévő adatok lekérdezése, módosítása
+    lekérdező vagy adatmanipulációs nyelvvel
+
+    \item támogassa az adatok \zkod{hosszú távú},
+    \zkod{biztonságos} tárolását
+
+    \item felügyelje a több felhasználó által egy
+    időben történő hozzáférését
+
+    \item \zkod{adatintegritás} \tabto{4.5cm} – \tabto{5.5cm}
+    érvényesség, helyesség, ellentmondás-mentesség
+    
+    \item \zkod{rugalmasság} \tabto{4.5cm} – \tabto{5.5cm}
+    adatok egyszerűen módosíthatóak
+    
+    \item \zkod{hatékonyság} \tabto{4.5cm} – \tabto{5.5cm}
+    gyors és hatékony keresés, módosíthatóság
+    
+    \item \zkod{adatfüggetlenség} \tabto{4.5cm} – \tabto{5.5cm}
+    hardver és szoftverfüggetlenség
+    
+    \item \zkod{adatbiztonság} \tabto{4.5cm} – \tabto{5.5cm}
+    védelem a hardver és szoftverhibáb ellen
+    
+    \item \zkod{adatvédelem} \tabto{4.5cm} – \tabto{5.5cm}
+    illetéktelen felhasználókkal szemben
+    
+    \item \zkod{osztott hozzáférés} \tabto{4.5cm} – \tabto{5.5cm}
+    több felhasználó egyidejű hozzáférése
+
+    \item \zkod{integritási kényszerek} \tabto{5cm} – \tabto{5.5cm}
+    szabályok, amiket figyelembe kellm venni
+
+    \item \zkod{tranzakciók} \tabto{4.5cm} – \tabto{5.5cm}
+    felhasználó általi változtatás nem végleges azonnal
+  \end{itemize}
+
+  \fogalom{Adatmodellezés}
+  \begin{itemize}
+    \item az adatmodellezés segítséget nyújt a
+    környezővilág megértésében és leképezésében,
+    a lényeges jellemzők kiemelésében
+
+    \item az adatmodell az \zkod{adatok} és az
+    azok \zkod{közötti összefüggés}ek leírására szolgál
+
+    \item a \zkod{modell} olyan mesterséges rendszer,
+    amely felépítésében és viselkedésében megegyezik
+    a vizsgált létező rendszerrel
+
+    \item adatmodellnek nevezzük az adatok struktúrájának
+    (felépítésének) leírására szolgáló modelleket.
+  \end{itemize}
+
+  \fogalom{Egyed-kapcsolat modell}
+  \begin{itemize}
+    \item az \zkod{ETK adatmodell} a fenti három fogalom együttese
+    
+    \item \zkod{egyed} – az információs rendszert
+    felépítő személyek, tárgyak, események 
+    \begin{itemize}
+      \item nem elszigetelten, hanem kapcsolatban állnak
+      egymással és más objetumokkal
+    \end{itemize}
+    
+    \item \zkod{tulajdonság} – egyedeket jellemzik,
+    egy érték, aminek tulajdonságtípusa van
+    \begin{itemize}
+      \item \zkod{azonosító}
+      \tabto{6.5cm} – \tabto{7.5cm}
+      egyedi, nem ismétlődhet (\nkod{ID})
+      
+      \item \zkod{leíró tulajdonság}
+      \tabto{6.5cm} – \tabto{7.5cm}
+      ismétlődhet (\nkod{név})
+
+      \item \zkod{gyengén jellemző tulajdonság}
+      \tabto{6.5cm} – \tabto{7.5cm}
+      lehet üres is (\nkod{kedvenc szín})
+
+      \item \zkod{kapcsoló tulajdonság}
+      \tabto{6.5cm} – \tabto{7.5cm}
+      itt leíró, ott azonosító (\nkod{szül hely})
+    \end{itemize}
+
+    \item \zkod{kapcsolat} – 2 egyed közötti viszony
+    \begin{itemize}
+      \item lehet többszintű, bonyolult, melyben
+      több rendszer is kapcsolatban áll egymással
+    \end{itemize}
+  \end{itemize}
+
+  \fogalom{Kapcsolat típusok}
+  \begin{itemize}
+    \item (\zkod{1-1}) – "\zkod{egy az egyhez}"
+    \begin{itemize}
+      \item egy egyedtípus egy egyedéhez egy másik
+      egyedtípus csak egyetlen egyede kapcsolódhat,
+      és fordítva is igaz
+      (\nkod{osztály–osztályfőnök})
+    \end{itemize}
+
+    \item (\zkod{1-N}) – "\zkod{egy a többhöz}"
+    \begin{itemize}
+      \item egy egyedtípus egy egyedéhez egy másik
+      egyedtípus több egyede is kapcsolódhat,
+      de fordítva nem igaz
+      (\nkod{osztály–tanuló})
+    \end{itemize}
+
+    \item (\zkod{N-M}) – "\zkod{több a többhöz}"
+    \begin{itemize}
+      \item egy egyedtípus egy egyedéhez egy másik
+      egyedtípus több egyede is kapcsolódhat,
+      de fordítva is igaz
+      (\nkod{osztály–tanár})
+    \end{itemize}
+
+    \item az \zkod{adatbázis} fogalma a kapcsolatok alapján:
+    \begin{itemize}
+      \item véges számú egyedek és azok véges számú tulajdonságainak
+      és kapcsolatainak adatmodell szerinti szervezett együttese
+    \end{itemize}
+
+    \begin{figure}[H]
+      \flushright
+      \begin{tikzpicture}[node distance=8em]
+        \node[entity] (ent1) {Egyed${}_1$};
+        \node[relationship] (rel1) [right of=ent1] {Kapcsolat${}_1$} edge (ent1);
+        \node[attribute] (attr1) [below left of=rel1] {\key{Kulcstul}} edge[<-] (rel1);
+        \node[attribute] (attr2) [below of=rel1] {Többértékű} edge[<<-] (rel1);
+        \node[attribute] (attr3) [below right of=rel1] {\xcancel{Összetett}} edge[<-] (rel1);
+        \node[entity] (ent2) [right of=rel1] {Egyed${}_2$} edge (rel1);
+        \node[relationship] (rel2) [right of=ent2] {Kapcsolat${}_2$} edge (ent2);
+        \node[attribute] (attr4) [below of=rel2] {Egyszerű} edge[<-] (rel2);
+        \node[attribute] (attr5) [below right of=rel2] {Egyértékű} edge[<-] (rel2);
+      \end{tikzpicture}
+    \end{figure} %tikz
+
+    \item a \zkod{kapcsolat foka} lehet\dots
+    \begin{itemize}
+      \item \zkod{Unáris} \tabto{2cm} – \tabto{2.5cm} rekurzív
+      
+      \item \zkod{Bináris} \tabto{2cm} – \tabto{2.5cm} két résztvevős
+
+      \item \zkod{Trináris} \tabto{2cm} – \tabto{2.5cm} három résztvevős
+    \end{itemize}
+  \end{itemize}
+
+  
+
+
+
+  \section{Tétel – Relációs adatbázismodell} %10
+
+  \fogalom{Adatbázis szerkezetek}
+  A leggyakoribb adatszerkezetek:
+  \zkod{hierarchikus},
+  \zkod{hálós},
+  \zkod{relációs}.
+
+  \vspace{.5em}
+  \zkod{Hierarchikus} esetben csak egy a többhöz
+  (\zkod{1-N}) kapcsolatok képezhetőek le.
+  Az adatok a tárolt hierarchia szerint érhetőek el.
+  Fastruktúrával szemléltethető,
+  hiszen az adatokat alá-fölérendeltségi
+  viszonnyal meghatározható szerkezettel írjuk le.
+
+  \vspace{.5em}
+  \zkod{Hálós} adatbázismodell esetén a kapcsolatok
+  gráfokkal írhatóak le, ahol a csomópontokat élekkel
+  kötjük össze. Csak a tárolt kapcsolat mentén járható be.
+  A modellel egy a többhöz (\zkod{1-N}) és több a többhöz 
+  (\zkod{N-M}) kapcsolatot és leírrhatunk.
+
+  \fogalom{Reláció jellemzői}
+  
+  \zkod{Relációs modell} esetén az adatokat \zkod{táblázat}os
+  formában tároljuk. Nincsenek előre meghatározott kapcsolatok.
+  \begin{itemize}
+    \item egyszerűen értelmezhető, átlátható
+    
+    \item rugalmas, könnyen kezelhető
+    
+    \item relációk kezelése relációs algebrával
+  \end{itemize}
+  
+  A \zkod{reláció} egy \zkod{adattábla}. (táblázat)
+  \begin{itemize}
+    \item \zkod{rekord} \tabto{2.5cm} – \tabto{3.2cm}
+    a táblázat sorai
+    
+    \item \zkod{attribútum} \tabto{2.5cm} – \tabto{3.2cm}
+    a táblázat oszlopaiú
+
+    \item \zkod{mező} \tabto{2.5cm} – \tabto{3.2cm} a
+    a sorok és oszlopok metszetei
+  \end{itemize}
+
+  A reláció rekordjaiban tároljuk a logikailag összefüggő adatokat.
+  A relációban tárolt rekordok száma a reláció \zkod{számossága}.
+  Az oszlopokban azonos tulajdonságokra vonatkozó adatok jelennek meg.
+  Egy tábla nem tartalmazhat azonos nevű oszlopot.
+  Az oszlopok száma a reláció \zkod{foka}. Követelmények:
+  \begin{itemize}
+    \item minden rekordja különböző
+    \item nincs két azonos attribútum
+    \item minden rekord mezőszerkezete azonos
+    \item a rekordok és attribútumok sorrendje tetszőleges
+  \end{itemize}
+  
+  \fogalom{A relációs algebra műveletei}
+  \begin{enumerate}
+    \item \zkod{adatkezelő} műveletek
+    \begin{itemize}
+      \item adatbevitel, törlés, adatmódosítás
+    \end{itemize}
+
+    \item \zkod{adatlekérdező} műveletek
+    \begin{itemize}
+      \item relációs algebra műveleteivel,
+      mindig új relációt eredményez
+    \end{itemize}
+  \end{enumerate}
+
+  A \zkod{relációs algebra} műveletei lehetnek
+  egy vagy többoperandusúak. Az előbbit egy, az
+  utóbbit pedig több reláción végezzük el.
+  
+  \vspace{1em}
+  \begin{minipage}[t]{0.5\textwidth}
+    \begin{itemize}
+      \item \zkod{szelekció} (kiválasztás) \\
+      \tabto{5mm} rekordokat választunk ki
+      
+      \item \zkod{projekció} (vetítés) \\
+      \tabto{5mm} attribútumokat választunk ki
+
+      \item \zkod{kiterjesztés} \\
+      \tabto{5mm} matematikai műveletekkel új oszlop
+
+      \item \zkod{szelekció} (kiválasztás) \\
+      \tabto{5mm} attribútumok alapján csoport, \\
+      \tabto{5mm} majd hozzá érték
+    \end{itemize}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.5\textwidth}
+    \begin{itemize}
+      \item \zkod{Descartes-szorzat} \\
+      \tabto{5mm} 2 reláció sorainak összes kombinációja
+
+      \item \zkod{összekapcsolás} \\
+      \tabto{5mm} összekapcsolás attribútum alapján
+
+      \item \zkod{unió}
+
+      \item \zkod{metszet}
+
+      \item \zkod{különbség} \\
+      \tabto{5mm} nem kommutatív
+    \end{itemize}
+  \end{minipage}
+
+  Az azonosítás történhet \zkod{kulcs} alapján,
+  amely egyértelműen azonosítja az egyedet az egyedhalmazon belül.
+  Amennyiben egyetlen attribútumból áll, akkor \zkod{egyszerű},
+  egyébként \zkod{összetett}.
+  Megadható több kulcs is, amire szükségünk van az adott
+  deladatnál, azt \zkod{elsődleges} kulcsnak nevezzük,
+  a többi mind \zkod{másodlagos}. \zkod{Idegen} kulcs egy
+  reláció olyan attribútumai, melyek egy másikban elsődlegesek.
+
+  \fogalom{SQL alapok}
+  Hogy elkerüljük at \zkod{anomáliá}kat, az adatbázisokat
+  \zkod{normalizálni} szokták. Ennek lényege, hogy a
+  változtatási anomáliák megszűnjenek. (módosítási, beírási,
+  törlési) A normalizálásnak több szintje létezik.
+  Minden \zkod{relációs séma} megköveteli legalább
+  az első normálformát. Gyakorlatban a harmadikig szokták.
+  \begin{itemize}
+    \item \zkod{1. normál forma}
+    \begin{itemize}
+      \item ha a mezőé függéseinek rendszerében
+      lérezik egy olyan kulcs, amelytől minden
+      más mező függ, azaz minden mezője 
+      funkcionálisan függ a kulcsmező csoporttól
+    \end{itemize}
+    
+    \item \zkod{2. normál forma}
+    \begin{itemize}
+      \item nincs benne részleges függés, azaz bármely nem
+      kulcs mező a teljes kulcstól függ, de nem függ a
+      kulcs bármely részhalmazától
+    \end{itemize}
+
+    \item \zkod{3. normál forma}
+    \begin{itemize}
+      \item nem áll fenn tranzitív függőség, azaz
+      a nem kulcs mezők nem függnek egymástól,
+      tehát nincs funkcionális függőség a nem
+      elsődleges attribútumok között.
+    \end{itemize}
+  \end{itemize}
+
+  {\large \zkod{Definíció}}:
+  \begin{itemize}
+    \item \kkod{CREATE TABLE} \fkod{table\textunderscore{}name
+    (column1 datatype cond,\dots);}
+    \\ \hspace*{\fill}
+    \nkod{objektum létrehozása}
+
+    \item \kkod{DROP TABLE} \fkod{table\textunderscore{}name;}
+    \\ \hspace*{\fill}
+    \nkod{objektum megszűntetése}
+
+    \item \kkod{ALTER TABLE} \fkod{table\textunderscore{}name}
+    \kkod{ADD|MODIFY} \fkod{(column1 datatype cond|cond);}
+    \\ \hspace*{\fill}
+    \nkod{objektum séma módosítása}
+  \end{itemize}
+
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{table}[H]
+      \centering\begin{tabular}{|c|}
+        \hline
+        \fkod{PRIMARY KEY} \\
+        \fkod{NOT NULL} \\
+        \fkod{UNIQUE} \\
+        \fkod{CHECK cond} \\
+        \fkod{REFERENCING table\textunderscore{}name} \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{table}[H]
+      \centering\begin{tabular}{|c|}
+        \hline
+        \fkod{CHAR(n)}
+        \\ 
+        \fkod{NUMBER(n,m)}
+        \\ 
+        \fkod{DATE}
+        \\ \hline
+      \end{tabular}
+    \end{table}
+  \end{minipage}\hfill
+  
+  \vspace{1em}
+  {\large \zkod{Módosítás}}:
+  \begin{itemize}
+    \item \kkod{INSERT INTO} \fkod{table\textunderscore{}name}
+    \kkod{VALUES} \fkod{(field=value);}
+    \\ \hspace*{\fill}
+    \nkod{rekord felvitele}
+
+    \item \kkod{DELETE FROM} \fkod{table\textunderscore{}name}
+    \kkod{WHERE} \fkod{cond;}
+    \\ \hspace*{\fill}
+    \nkod{rekord tőrlése}
+
+    \item \kkod{UPDATE} \fkod{table\textunderscore{}name}
+    \kkod{SET} \fkod{field=value,\dots}\kkod{WHERE} \fkod{cond;}
+    \\ \hspace*{\fill}
+    \nkod{rekord módosítása}
+  \end{itemize}
+
+  {\large \zkod{Adatok lekérdezése}}:
+  \begin{itemize}
+    \item \kkod{SELECT} \fkod{coulomn1, column2, \dots}
+    \kkod{FROM} \fkod{table\textunderscore{}name1, table\textunderscore{}name,}
+    \kkod{WHERE} \fkod{cond;}
+  
+    \vspace{.5em}
+    \begin{table}[H]
+      \centering\begin{tabular}{|l r|}
+        \hline
+        \kkod{GROUP BY} & csoportosítás \\
+        \kkod{HAVING} \fkod{cond} & \hspace{2em} megszorítás \\
+        \kkod{ORDER BY} & rendezés \\
+        \hline
+      \end{tabular}
+    \end{table}
+
+    \item \kkod{SELECT} \fkod{column} \kkod{FROM}
+    \fkod{table\textunderscore{}name;}
+    \hfill \nkod{projekció}
+
+    \item \kkod{SELECT} \fkod{column} \kkod{FROM}
+    \fkod{table\textunderscore{}name}
+    \kkod{WHERE} \fkod{cond;}
+    \hfill \nkod{szelekció}
+    
+    \item \kkod{SELECT} \fkod{*} \kkod{FROM}
+    \fkod{table\textunderscore{}name1, table\textunderscore{}name2;}
+    \hfill \nkod{Descartes-szorzat}
+    
+    \item \kkod{SELECT} \fkod{expression coulomn,\dots}
+    \kkod{FROM} \fkod{table\textunderscore{}name;}
+    \hfill \nkod{kiterjesztés}
+
+    \item \kkod{SELECT} \fkod{aggregation}
+    \kkod{FROM} \fkod{table\textunderscore{}name;}
+    \hfill \nkod{aggregáció megadása}
+
+    \vspace{.5em}
+    \begin{table}[H]
+      \centering\begin{tabular}{|c|}
+        \hline
+        \kkod{SUM}\fkod{(expr)} \\
+        \kkod{COUNT}\fkod{(expr)} \\
+        \kkod{MIN}\fkod{(expr)} \\
+        \kkod{AVG}\fkod{(expr)} \\
+        \kkod{MAX}\fkod{(expr)} \\
+        \hline
+      \end{tabular}
+    \end{table}
+
+    \item \kkod{SELECT} \fkod{aggregation}
+    \kkod{FROM} \fkod{table\textunderscore{}name;}
+    \kkod{GROUP BY} \fkod{expr;}
+    \\ \hspace*{\fill}
+    \nkod{aggregáció, csoportképzés}
+
+    \item \kkod{SELECT} \fkod{column}
+    \kkod{FROM} \fkod{table\textunderscore{}name;}
+    \kkod{ORDER BY} \fkod{column1 mode1, \dots;}
+    \\ \hspace*{\fill}
+    \nkod{eredmény rekordok rendezése}
+
+    \begin{table}[H]
+      \centering\begin{tabular}{|c|}
+        \hline
+        \kkod{ASC} \\
+        \kkod{DESC}\\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{itemize}
+
+  {\large \zkod{Adatok lekérdezése}}:
+  
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{table}[H]
+      \centering\begin{tabular}{|l r|}
+        \hline
+        \kkod{=} & egyenlő \\
+        \kkod{\textless\textgreater,\string^=} & nem egyenlő \\
+        \kkod{\textgreater} & nagyobb \\
+        \kkod{\textgreater=} & nagyobb egyenlő \\
+        \kkod{\textless} & kisebb \\
+        \kkod{\textless=} & kisebb egyenlő \\
+        \hline
+      \end{tabular}
+    \end{table}
+    \begin{table}[H]
+      \centering\begin{tabular}{|l r|}
+        \hline
+        \kkod{LIKE} \fkod{'a\%'}
+        & \kkod{'a'}-val kezdődik \\
+        \kkod{LIKE} \fkod{'x\textunderscore'}
+        & \kkod{'x'}-val kezdődik, 2 betű \\
+        \kkod{LIKE} \fkod{'\%a\%'}
+        & \kkod{'a'}-t tartalmaz \\
+        \kkod{LIKE} \fkod{'\textunderscore{}a\%x'}
+        & 2. betű \kkod{'a'}, \fkod{'x'}-re végződik \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{table}[H]
+      \centering\begin{tabular}{|l r|}
+        \hline
+        \kkod{BETWEEN} \fkod{x} \kkod{AND} \fkod{y}
+        & \hspace{.25em} adott értékek közé esik \\
+        \kkod{IN}\fkod{(a, b, c,\dots)} & értékek között van \\
+        \kkod{LIKE} \fkod{sample} & hasonlít a mintára \\
+        \hline
+      \end{tabular}
+    \end{table}
+    \begin{table}[H]
+      \centering\begin{tabular}{|l r|}
+        \hline
+        \kkod{NOT} & tagadás \\
+        \kkod{AND} & és \\
+        \kkod{OR} & vagy \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{minipage}\hfill
+
+
+
+  \section{Tétel – A számítógép architektúrák alapjai} %11
+
+  \fogalom{Boole függvények}
+  lorem
+  \fogalom{Logikai kapuk}
+  lorem
+  \fogalom{Kombinációs logikai hálózatok}
+  lorem
+  \fogalom{Szekvenciális logikai hálózatok}
+  lorem
+  \fogalom{Flip-flop}
+  lorem
+
+
+  
+  \section{Tétel – A számítógép architektúrák alapjai} %12
+
+  \fogalom{A számítógép felépítése}
+  lorem
+  \fogalom{Memóriák}
+  lorem
+  \fogalom{CPU részei}
+  lorem
+  \fogalom{Utasítás ciklus}
+  lorem
+  \fogalom{Szubrutinhívás}
+  lorem
+  \fogalom{Interrupt}
+  lorem
+  \fogalom{Közvetlen memória hozzáférés}
+  lorem
+
+
+
+\end{document}

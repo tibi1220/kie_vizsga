@@ -1,0 +1,468 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+  \section{Tétel – Az objektum-orientált programozás alapjai} %1
+
+  \fogalom{Objektum}
+  Az objektum (\kkod{object}) egy rendszer egyedileg
+  azonosítható szereplője adatokkal és működéssel.
+  
+
+  \fogalom{Osztály}
+  Az osztály (\kkod{class}) megegyező szerkezetű,
+  hasonló viselkedésű elemek mintája.
+  Ez egy felhasználó által definiált típus.
+  Az osztályhoz tartozó példány (\kkod{instance}) az objektum.
+  Adatszerkezetből és tagfüggvényekből áll.
+  Alaphelyzetben az adattagok és a tagfüggvények
+  nem láthatóak.
+
+
+  \fogalom{Struktúra}
+  A struktúrák (\kkod{struct}) adattagjai kívülről
+  alaphelyzetben elérhetőek, ellentétben az osztályokkal.
+
+
+  \fogalom{Tagfüggvények}
+  Az adattípussal kapcsolatban álló (az adattagokon működő)
+  függvények lehetnek belül, vagy kívül definiáltak.
+  Lehetnek továbbá \kkod{inline} függvények.
+  (Hívás helyén lesznek lefordítva.)
+
+
+  \fogalom{Konstruktor}
+  Függvény az objektumok előkészítésére, esetleg inicializálása.
+  Ugyanaz a neve mint az osztálynak, nincs típusa,
+  sem visszatérési értéke. Létrehozás után nem hívható.
+  Ha nem adjuk meg akkor is létezik alapértelmezett. (\kkod{default})
+  Másoló konstruktor megadása konstans referenciával lehetséges.
+
+
+  \fogalom{Destruktor}
+  Az objektumok megszűnésekor automatikusan meghívódó függvény.
+  A neve: \kkod{\textasciitilde ClassName}. Nincsenek paraméterei.
+  Nem terhelhető túl. Statikus \kkod{instance} esetén a
+  \kkod{scope}-on kívül, dinamikus esetben a \kkod{delete}
+  kulcsszó esetén hívódik meg.
+
+
+  \fogalom{Statikus tagok}
+  A statikus (\kkod{static}) tagok nem az objektumhoz,
+  hanem az osztályhoz vannak kötve. Az osztályban nem definiálható,
+  névtér (\kkod{namespace}) szintjén kell ezt megtenni.
+
+
+  \fogalom{Friend függvények}
+  A \kkod{friend} függvények segítségével az osztály rejtett tagjai
+  is elérhetőek.
+
+
+  
+  \pagebreak
+  \section{Tétel – Az objektum-orientált programozás alapjai} %2
+
+  \fogalom{Operátorok túlterhelése}
+  Szinte minden operátor túlterhelhető, kivéve:
+  \kkod{::}, \kkod{.}, \kkod{.*}, \kkod{?},
+  \kkod{sizeof()}, \kkod{typeid()}.
+  Új műveleti jel nem hozhetó létre.
+  Egyoperandusú művelet esetén:
+  \begin{itemize}
+    \item \kkod{opetaror++();}
+    \hspace{11.5mm} $\rightarrow$ \hspace{5mm}
+    \kkod{myVar++} \hspace{5mm} (Utótag)
+
+    \item \kkod{opetaror++(int);}
+    \hspace{5mm} $\rightarrow$ \hspace{5mm}
+    \kkod{++myVar} \hspace{5mm} (Előtag)
+  \end{itemize}
+
+
+  \fogalom{C++ IO}
+  Az \kkod{std namespace}-t használjuk, az alábbi fejlécekkel:
+  \kkod{iostream}, \kkod{iomanip}.
+  \begin{lstlisting}
+    #include <iostream>
+    #include <iomanip>
+
+    cin.get();
+    cout.put('\n');
+
+    cout << "Hello World"
+    string tmp;
+    cin >> tmp;
+
+    cout.flags(ios_base::hex)
+      // (no)boolalpha
+      // left, right
+      // dec, hex, oct
+      // fixed, scientific
+    cout.precision(2)
+
+    cout << setw(5) << setprecision(2) << 12.345;
+
+    // Overloading
+    friend ostream& operator<< (ostream& os, const type& myVar);
+    friend istream& operator>> (istream& is, type& myVar);
+  \end{lstlisting}
+
+
+  \fogalom{New, delete}
+  A \kkod{new} és \kkod{delete} kulcsszavak segítségével
+  dinamikus példányokat hozhatunk létre, és törölhetünk.
+  Ezek is túlterhelhetőek:
+  \begin{lstlisting}
+    void* operator new(size_t size){
+      // { ... }
+      return new typename[size];
+    }
+
+    void operator delete (void* p, size_t size){
+      // { ... }
+      ::delete p;
+    }
+  \end{lstlisting}
+
+
+  \fogalom{Osztály hierarchiák}
+  Az újrahasznosítható szoftver alapja.
+  Többszörös öröklődés (\kkod{inheritance}) lehetséges.
+
+
+
+  \section{Tétel – Az objektum-orientált programozás alapjai} %3
+
+  \fogalom{Öröklődés}
+  \begin{table}[htbp]
+    \centering\begin{tabular}{| c || c | c | c |}
+      \hline
+       & \kkod{public} & \nkod{protected} & \pkod{private} \\
+       \hline \hline
+       \kkod{public} & \kkod{public} & \nkod{protected} & \pkod{-}\\
+       \hline
+       \nkod{protected} & \nkod{protected} & \nkod{protected} & \pkod{-}\\
+       \hline
+       \pkod{private} & \pkod{private} & \pkod{private} & \pkod{-}\\
+       \hline
+      \end{tabular}
+  \end{table}
+
+  \begin{itemize}
+    \item osztály más osztályok tulajdonságait/viselkedését
+    is magába integrálja
+
+    \item módosított viselkedésű osztály az eredeti kód másolata,
+    hivatkozása nélkül
+
+    \item minden változás automatikusan végigmegy a hierarchián
+    
+    \item az ős neve a bázis osztály (\kkod{base/parent class})
+    
+    \item az utód neve leszármazott osztály (\kkod{derived/child class})
+    
+    \item konstruktor, destruktor, barát függvények nem öröklődnek
+  \end{itemize}
+
+
+  \fogalom{Egységbe zárás}
+  Az objektum egységbe zárja (\kkod{encapsulation})
+  az adatokat és a programokat. Magába foglalja a
+  külvilág felé mutatott viselkedést.  A belső struktúrája,
+  állapota, adatai és kezelőfüggvényei kívülről nem láthatóak.
+  (\kkod{data hiding})
+
+
+  \fogalom{Protected osztálytagok}
+  A \kkod{protected} tagváltozók öröklődés esetén
+  nyilvánosak az utódosztály számára,
+  de kívülről nem elérhetőek.
+
+
+  \fogalom{Kompozíció, aggregáció}
+  Kompozíció esetén egy meglévő osztályt
+  tagobjektumként használunk
+  fel egy másik osztályban. (statikus példány)
+  Aggregáció esetén pointert vagy referenciát
+  használunk. (dinamikus példány)
+  A különbség akkor lép fek, ha a felhasznált
+  osztályt módosítani kezdjük.
+
+
+  \fogalom{Többszörös öröklődés}
+  Többszörös öröklődés esetén több ős van.
+
+
+  \fogalom{Barátság}
+  Az alaposztály barátja az utódban az öröklött tagokat éri el.
+  Az utód barátja az ős \kkod{public} és \kkod{protected} tagjait éri el.
+  \begin{lstlisting}
+    friend type myFunc();           // Kulso fuggveny
+    friend type MyClass::myFunc();  // Masik osztaly publikus tagfuggvenye
+    friend MyClass;                 // Masik osztaly osszes fuggvenye
+  \end{lstlisting}
+
+
+
+  \section{Tétel – Az objektum-orientált programozás alapjai} %4
+
+  \fogalom{Polimorfizmus}
+  A szó jelentése: ugyanaz a metódus más-
+  és másképpen működik a családfa szintjein.
+  A tagfüggvények újradefiniálhatóak.
+  Lehet a fordításkor korai, statikus kötés,
+  vagy futás közben késői, vagy dinamikus kötés.
+  Ősosztály-típusú mutatóval meghívható az ős metódusa a leszármazottra.
+  \begin{lstlisting}
+    class Parent{};
+    class Child : public Parent{
+      public:
+        Child() : Parent() {};
+    };
+  \end{lstlisting}
+
+  \fogalom{Virtuális alaposztályok.}
+  A \kkod{virtual} kulcsszót használva a tagfüggvények
+  átdefiniálhatóak lesznek a leszármazottakban.
+  "\kkod{=0}" esetén tisztán virtuális lesz.
+  \begin{lstlisting}
+    virtual void myFunc = 0;
+  \end{lstlisting}
+  A virtuális függvények virtuálisak maradnak,
+  a származtatott osztályok hierachiájában újra definiálhatjuk
+  őket a \kkod{virtul} kulcsszó nélkül. (\kkod{C++11} óta)
+  Újradefiniáláskor pontosan egyező függvényt kell megadni
+  (név, típus, paraméterlista), egyébként túlterhelés lesz.
+  A futás közben dől el, hogy melyik tagfüggvény aktivizálódik.
+  Az aktiválás az ős pointerén vagy referenciáján keresztül
+  egy a virtuális függvények címeit tartalmazó
+  táblázat (\kkod{VMT}) segítségével.
+
+  \fogalom{Abstract osztály}
+  Tisztán virtuális függvényt tartalmazó osztály nem példányosítható.
+  Ezeket \kkod{abstract} osztályoknak hívjuk.
+  Az \kkod{interfész} olyan absztrakt osztály,
+  amely csak tisztán virtuális függvényeket és tartalmaz.
+
+  \fogalom{Általánosított osztályok}
+  Általánosított osztályokat \kkod{template}
+  segítségével készíthetünk.
+  \begin{lstlisting}
+    template<typename T>
+    class ClassName{
+      T myFunc (T myVar){
+        // { ... }
+        return myVar
+      }
+    };
+  \end{lstlisting}
+  A \kkod{template} minden használó forrás állományban kell.
+
+
+
+  \pagebreak
+  \section{Tétel – Az objektum-orientált programozás alapjai} %5
+
+  \fogalom{Standard Template Library}
+  Adatstruktúrákat és algoritmusokat tartalmaz
+  \kkod{C++} nyelvhez.
+
+  \fogalom{Tárolók}
+  Soros és asszociatív tárolókat tartalmaz az \kkod{STL}.
+  A soros tárolók jellemzője,
+  hogy megőrzik az elemek beviteli sorrendjét.
+  Az asszociatív tárolók elemei egy kulcs alapján érhetők el.
+  Lehetnek rendezettek, illetve rendezetlenek.
+  Mindegyiknek van \kkod{default} és \kkod{copy}
+  konstruktora, \kkod{=} operátora.
+
+  \fogalom{Bejárók}
+  A bejárók (\kkod{iterator}) pointer szerű, tároló
+  független objektumok. Teljes bejárás esetén a
+  \kkod{begin()}/\kkod{rbegin()} és
+  \kkod{end()}/\kkod{rend()} használatos.
+  Egy pozíciót határoznak meg a tárolóban.
+  \kkod{terator}okra alkalmazható függvénysablonok:
+  \begin{lstlisting}
+    begin(); end();
+    advance(<int>count);
+    distance(iterator1, iterator2);
+    next(iterator, <int>count=1);
+    prev(iterator, <int>count=1);
+  \end{lstlisting}
+
+  \fogalom{Algoritmusok}
+  Algoritmusok a konténerek adatainak kezelésére
+  (sorbarakás, keresés, szélsőértékek \dots)
+
+  \fogalom{Függvényobjektumok}
+  Függvényobjektumok megvalósítják a függvényhívás
+  \kkod{()} operátorát az algoritmusokban.
+  Hívásakor az osztály objektumát adjuk át.
+  \begin{lstlisting}
+    class Even{
+      public: bool operator() (int i) const {
+        return (x%2) == 0;
+      }
+    };
+    vector<int> numbers{2, 3, 6, 9};
+    vector<int>::iterator i = find_if(
+      begin(szamok), end(szamok), Even()
+    );
+  \end{lstlisting}
+  \kkod{C++11} óta általánosított függvényobjektumok
+  is elérhetőek. Szintén ettől a szabványtól használatosak
+  a névtelen (\kkod{lambda}) függvények.
+  \begin{itemize}
+    \item \kkod{[]\{\};}        \hspace{33pt} – \hspace{8pt}
+    nem használ a hívó hatókörében változókat
+
+    \item \kkod{[=]\{\};}       \hspace{27pt} – \hspace{8pt}
+    a hívó hatókörében definiált változók másolatát látja
+    
+    \item \kkod{[\&]\{\};}      \hspace{27pt} – \hspace{8pt}
+    a hívó hatókörében definiált változók referenciát látja
+    
+    \item \kkod{[\&,i]\{\};}  \hspace{15.2pt} – \hspace{8pt}
+    a hívó hatókörében definiált változók referenciát,
+    \kkod{i} másolatát látja
+    
+    \item \kkod{[=,\&{}i]\{\};}  \hspace{9pt} – \hspace{8pt}
+    a hívó hatókörében definiált változók másolatát,
+    \kkod{i} referenciát látja
+  \end{itemize}
+
+  \fogalom{Soros tárolók}
+  
+  Az \kkod{array} adott méretű és típusú tárolótömb
+  folytonos memóriaterületen. \kkod{for} ciklussal bejárható.
+  \begin{lstlisting}
+    // Array
+    #include <array>
+
+    array<typename, size> myArr { {myVar1, myVar2, myVar3} };
+
+    myArr[0] = 12; // feltoltes [] operatorral, bejarhato for ciklussal
+
+    front(); back(), data(); at(); []         // elem eleres
+    begin(); end(); rbegin(); rend();         // iterator
+    empty(); size(); max_size()               // meretek
+    swap(); fill(); reverse(); accumulate();  // muveletek
+  \end{lstlisting}
+
+  A \kkod{vector} dinamikus tömbökkel megvalósított soros tároló.
+  Folytonos adatterületen pointerrel és bejáróval is bejárható.
+  Automatikusan növekszik és csökken a tárolási mérete.
+  Az elemek könnyen elérhetők pozíció alapján. (állandó idővel)
+  Elemek sorban bejárhatóak (lineáris idővel)
+  Elemek illeszthetők/törölhetők a végéről. (konstans idővel)
+  \begin{lstlisting}
+    // Vector
+    #include <vector>
+
+    vector<typename> myVector1 (count, myVar);
+    vector<typename> myVector2 (myVector1.begin(), myVector1.end());
+    vector<typename> myVector3 (myVector1);
+
+    begin(); end(); rbegin(); rend();   // bejarok
+    []; at(); front(); back();          // tulajdonsagok
+    size(); resize();                   // meretek (ossz)
+    capacity(), reverse();              // meretek (hatralevo)
+    push_back(), pop_back();            // modositok
+    iterator insert();                  // beszuras (nem hatekony)
+
+    // Bejaras
+    for(i = myVec.begin(); i != myVec.end(); i++);
+    for(int i = 0; i < myVec.size(); i++);
+    for(auto i : myVec);
+    for(auto& i : myVec);
+  \end{lstlisting}
+
+  A \kkod{string} is \kkod{STL} tároló
+  \begin{lstlisting}
+    // string
+    #include<string>
+
+    at(); []; front(); back(); data();
+    begin(); end(); rbegin(); rend();
+    empty(); size(), max_size();
+    push_back(); copy(); c_str();
+    find(); find_first(); insert(); replace();
+  \end{lstlisting}
+
+  A \kkod{deque} egy kétvégű sor. 
+  Nem folytonos adatterületen helyezkedik el.
+  (nincs \kkod{capacity()} és \kkod{reverse()})
+  Egydimenziós tömböt tartalmazó listában tárolódik.
+  Az elemek könnyen elérhetőek pozíció alapján. (állandó idővel)
+  (\kkod{[]}, \kkod{at()}, \kkod{front()}, \kkod{back()})
+  Elemek sorban bejárhatóak. (lineáris idővel)
+  Lassabb, mint a sor.
+  
+  \vspace{1em}
+  \begin{lstlisting}
+    // deque
+    #include <deque>
+
+    deque<typename> myDQ1(count, myVar);
+    deque<typename> myDQ2{myVar1, myVar2, ...};
+    deque<typename> myDQ3(myDQ1.begin(), myDQ1.end());
+    deque<typename> myDQ4(myDQ1);
+    
+    push_front(); pop_front();
+    push_back(); pop_back();
+  \end{lstlisting}
+  
+  A listák (\kkod{list}) esetén nincsen direkt elérés.
+  (\kkod{at()}, \kkod{[]}) Kétirányban láncolt lista.
+  Gyors beszúrás törlés, sorbarakás összefésülés.
+  \begin{lstlisting}
+    // list
+    #include <list>
+
+    front(); back(); push_front(); push_back(); pop_front(); pop_back();
+    iterator insert();
+    sort(); merge(); splice();
+  \end{lstlisting}
+ 
+  Az egy irányban láncolt listák (\kkod{forward{}\textunderscore{}list})
+  esetén nincsen \kkod{push{}\textunderscore{}back()} és
+  \kkod{pop{}\textunderscore{}back()}, viszont van
+  \kkod{insert{}\textunderscore{}after()}.
+
+  \fogalom{Asszociatív tárolók}
+  Az asszociatív tárolók (\kkod{map}, \kkod{set})
+  absztrakt adattípusok.
+  A \kkod{set} egyetlen elem sort tartalmaz, ami a kulcs egyben.
+  Nincsen \kkod{[]} operátor.
+  \begin{lstlisting}
+    // set
+    #include <set>
+
+    typename array[] = {var1, var2, var3}
+    set<typename> mySet1(array, array+3)
+    set<typename> mySet2(mySet1.begin(), mySet1.end())
+    set<typename> mySet3(mySet1)
+
+    begin(); end(); rbegin(); rend();
+    ::iterator; size(); max_size(); insert();
+    empty(); erase(); clear(); find();
+  \end{lstlisting}
+
+  A \kkod{map} kulcs–érték adatpárokat tartalmaz.
+  (a \kkod{pair} sablon szerint) Lehet definiálni az
+  összehasonlítást kulcsra és értékre is.
+  Van \kkod{[]} operátor. (kulcs kell)
+  \begin{lstlisting}
+    // map
+    #include<map>
+
+    map<typename1, typename2> myMap1;
+    map<typename1, typename2> myMap2(myMap1.begin(), myMap1.end());
+    map<typename1, typename2> myMap3(myMap1);
+
+    begin(); end(); rbegin(); rend();
+    ::iterator; size(); max_size(); insert();
+    empty(); erase(); clear(); find();
+  \end{lstlisting}
+
+  \end{document}
