@@ -1,0 +1,80 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+  % ----------------------------------------------------------------------------
+  % ------------------------------ Section 11 ----------------------------------
+  % ----------------------------------------------------------------------------
+  \section{Tétel – A számítógép architektúrák alapjai} %11
+
+  \fogalom{Boole függvények}
+  \begin{itemize}
+    \item 2 változós \zkod{Boole függvény}ekből 16 darab van
+    
+    \item $n$ változósból $2^{2^n}$
+    
+    \item \kkod{AND}, \kkod{OR}, \kkod{NOT} függvényekből
+    az összes Boole függvény előállítható
+
+    \item a \kkod{NAND} és a \kkod{NOR} önmagukban képesek
+    az összeset előállítani
+
+    \begin{figure}[H]
+      \centering
+      \begin{circuitikz}[american]
+        \ctikzset{american or shape=roundy}
+  
+        \node [and port](myand) at (0,0) {};
+        \node [below=4pt] (andnode) at (myand.south) {\kkod{AND}};
+
+        \node [nand port](mynand) at (2,0) {};
+        \node [below=4pt] (nandnode) at (mynand.south) {\kkod{NAND}};
+
+        \node [or port](myor) at (4,0) {};
+        \node [below=4pt] (ornode) at (myor.south) {\kkod{OR}};
+
+        \node [nor port](mynor) at (6,0) {};
+        \node [below=4pt] (nornode) at (mynor.south) {\kkod{NOR}};
+
+        \node [xor port](myxor) at (8,0) {};
+        \node [below=4pt] (xornode) at (myxor.south) {\kkod{XOR}};
+
+
+      \end{circuitikz}
+    \end{figure}
+
+  \end{itemize}
+
+  \fogalom{Logikai kapuk}
+  lorem
+  \fogalom{Kombinációs logikai hálózatok}
+  lorem
+  \fogalom{Szekvenciális logikai hálózatok}
+  lorem
+  \fogalom{Flip-flop}
+  lorem
+
+
+  % ----------------------------------------------------------------------------
+  % ------------------------------ Section 12 ----------------------------------
+  % ----------------------------------------------------------------------------
+  \section{Tétel – A számítógép architektúrák alapjai} %12
+
+  \fogalom{A számítógép felépítése}
+  lorem
+  \fogalom{Memóriák}
+  lorem
+  \fogalom{CPU részei}
+  lorem
+  \fogalom{Utasítás ciklus}
+  lorem
+  \fogalom{Szubrutinhívás}
+  lorem
+  \fogalom{Interrupt}
+  lorem
+  \fogalom{Közvetlen memória hozzáférés}
+  lorem
+
+
+
+
+\end{document}
