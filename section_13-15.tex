@@ -272,18 +272,69 @@
   % ----------------------------------------------------------------------------
   \section{Tétel – Az operációs rendszerek alapjai} %14
   
-
   \fogalom{Holtpont}
-  lorem
-  \fogalom{Holtpont kezelése}
-  lorem
-  \fogalom{Holtpont észlelése}
-  lorem
-  \fogalom{Holtpont megelőzés}
-  lorem
-  \fogalom{Bankár algoritmus}
-  lorem
+  A \zkod{holtpont} egy rendszernek egy olyan állapota,
+  ahonnan külső beavatkozás nélkül nem tud elmozdulni.
+  Holtpont akkor fordulhat elő, amikor a folyamatok egy adott
+  halmazában minden egyes elem leköt néhány erőforrást,
+  és ugyanakkor várakozik is másokra.
 
+  \fogalom{Holtpont kezelése}
+
+  \begin{itemize}
+    \item \zkod{strucc algoritmus} –
+    nem teszünk semmit
+    
+    \item \zkod{detektálás} és \zkod{feloldás} –
+    észrevesszük, ha holtpont alakult ki, és megpróbáljuk feloldani
+
+    \item \zkod{megelőzés} –
+    strukturálisan holtpontmentes rendszert tervezünk
+  \end{itemize}
+
+  \fogalom{Holtpont észlelése}
+  Tegyük fel, hogy \fkod{4} \fkod{folyamat}unk és \fkod{10}
+  egység \fkod{erőforrás}unk van. A helyzet a következő:
+  \begin{table}[H]
+    \centering\begin{tabular}{|p{1.5cm} |p{1.5cm} |p{1.5cm} |}
+      \hline
+      & \fkod{foglal} & \fkod{kér}
+      \\ \hline
+      \fkod{\color{red}P1} & \fkod{4} & \fkod{\color{red}4} \\
+      \fkod{P2} & \fkod{1} & \fkod{0} \\
+      \fkod{\color{red}P3} & \fkod{3} & \fkod{\color{red}4} \\
+      \fkod{P4} & \fkod{1} & \fkod{2} \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  \zkod{Radikális} lépés, ha az összes folyamatot felszámoljuk.
+  \zkod{Kiméletes}, ha megnézzük, van-e menthető folyamat, esetleg
+  prioritás, vagy éppen mekkora része lett már az adott
+  folyamat feladatának elvűgezve. Minden esetben biztosítani
+  kell a folyamatok visszaállíthatóságát.
+
+  \fogalom{Holtpont megelőzés}
+  \zkod{Biztonságos}nak nevezzük azokat a
+  \zkod{folyamat-erőforrás} rendszereket, amelyekben
+  létezik a folyamatoknak (legalább egy) olyan sorrendje,
+  amely szerint végrehajtva őket, azok maximális
+  erőforrás igénye is kielégíthető. \zkod{Biztonságos
+  állapot}ban \pkod{nem lehetséges} holtponti állapot
+  kialakulása. A biztonságos állapotot \zkod{bankár
+  algoritmussal} ellenőrizhetjük. (bankban is ilyen
+  módszert alkalmaznak)
+
+  \fogalom{Bankár algoritmus}
+  \begin{enumerate}
+    \item adatok mátrixos felírása
+    \item az igények és a szabad erőforrások kiszámítása
+    \item megnézzük, hogy valamelyik folyamat kielégíthető-e
+    \item újraszámítás, folytatás\dots
+  \end{enumerate}
+  Ha találunk egy olyan sorrendet,
+  amelyben a folyamatok erőforrás igénye kielégíthető,
+  akkor a rendszer \zkod{biztonságos állapot}ban van.
 
   % ----------------------------------------------------------------------------
   % ------------------------------ Section 15 ----------------------------------
@@ -291,11 +342,138 @@
   \section{Tétel – Az operációs rendszerek alapjai} %15
   
   \fogalom{Ütemezési algoritmusok}
-  lorem
+  Többfeladatos (\zkod{multitask}) rendszereknél
+  a folyamatok közötti átkapcsolást,
+  azaz a környezetváltást az alacsony szintű
+  ütemezési algoritmusok végzik.
+  Általában a gyakorlatban többféle módszer
+  kombinációját alkalmazzák. Alap algoritmusok:
+
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{itemize}
+      \item \zkod{FCFS} \tabto{1.2cm} – \tabto{1.8cm}
+      First Come First Served
+  
+      \item \zkod{SJF} \tabto{1.1cm} – \tabto{1.8cm}
+      Shortest Job First
+  
+      \item \zkod{RR} \tabto{1cm} – \tabto{1.8cm}
+      Round Robin
+    \end{itemize}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{table}[H]
+      \centering
+      \begin{tabular}{|c|c|c|}
+        \hline
+        & \fkod{érk. idő} & \fkod{CPU igény}
+        \\ \hline
+        \fkod{P1} & \fkod{0} & \fkod{14} \\
+        \fkod{P2} & \fkod{7} & \fkod{8} \\
+        \fkod{P4} & \fkod{20} & \fkod{10} \\
+        \fkod{P3} & \fkod{11} & \fkod{36} \\
+        \hline
+      \end{tabular}
+    \end{table}
+  \end{minipage}\hfill
+
   \fogalom{Előbb jött – előbb fut algoritmus}
-  lorem
+  Az \zkod{FCFS} algoritmus esetén a folyamatok
+  érkezési sorrendjükben kapják meg a processzort.
+  Előnye, hogy ez a \zkod{legegyszerűbb}. Hátránya,
+  hogy a várakozási idő nagymértékben függ az érkezési
+  időtől. (csorda hatás, lassú kamion effektus)
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+     % {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+      \hline
+      & \fkod{érk. idő}
+      & \fkod{CPU igény}
+      & \fkod{kezd. időpont}
+      & \fkod{bef. időpont}
+      & \fkod{várakozási idő}
+      \\ \hline
+      \fkod{P1} & \fkod{0} & \fkod{14} & \fkod{0} & \fkod{14} & \fkod{0} \\
+      \fkod{P2} & \fkod{7} & \fkod{8} & \fkod{14} & \fkod{22} & \fkod{7} \\
+      \fkod{P3} & \fkod{11} & \fkod{36} & \fkod{22} & \fkod{58} & \fkod{11} \\
+      \fkod{P4} & \fkod{20} & \fkod{10} & \fkod{58} & \fkod{68} & \fkod{38} \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  Jelen esetben az átlagos várakozási idő:
+  $\mathtt{0 + 7 + 11 + 38 = 56}
+  \hspace*{1em}\rightarrow\hspace*{1em}
+  \mathtt{56/4 = 14}$.
+
+
   \fogalom{A legrövidebb előnyben algoritmus}
-  lorem
+  Az \zkod{SJF} algoritmus esetén a \zkod{CPU}-t
+  egy folyamat befejezése után a legrövidebbnek adja oda.
+  Előnye, hogy így a legrövidebb a várakozási idő. Hátránya,
+  hogy tudni kell előre a folyamatok hosszát, illetve
+  hogy \zkod{kiéheztet}i a hosszú folyamatokat.
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+     % {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+      \hline
+      & \fkod{érk. idő}
+      & \fkod{CPU igény}
+      & \fkod{kezd. időpont}
+      & \fkod{bef. időpont}
+      & \fkod{várakozási idő}
+      \\ \hline
+      \fkod{P1} & \fkod{0} & \fkod{14} & \fkod{0} & \fkod{14} & \fkod{0} \\
+      \fkod{P2} & \fkod{7} & \fkod{8} & \fkod{14} & \fkod{22} & \fkod{7} \\
+      \fkod{P4} & \fkod{20} & \fkod{10} & \fkod{22} & \fkod{32} & \fkod{2} \\
+      \fkod{P3} & \fkod{11} & \fkod{36} & \fkod{32} & \fkod{68} & \fkod{21} \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  Jelen esetben az átlagos várakozási idő:
+  $\mathtt{0 + 7 + 2 + 21 = 30}
+  \hspace*{1em}\rightarrow\hspace*{1em}
+  \mathtt{30/4 = 7,5}$.
+
+
   \fogalom{Körbenforgó algoritmus}
-  lorem
+  Az \zkod{RR} algoritmus esetén a folyamatokat egy
+  zárt körbe szervezzük, és minden folyamat egy előre
+  rögzített maximális időre kapja meg a processzort,
+  majd visszaáll a sor végére. Kombinálható prioritások
+  bevezetésével. (minden prioritási szintnek “saját köre“ van)
+  Előnye, hogy \zkod{egyszerű}, és \zkod {nincsen kiéheztetés}.
+  Hátránya, hogy az időszeletek lejártakor a folyamat
+  állapotát el kell menteni. (\zkod{időveszteség})
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+     % {|p{1cm} | p{1.5cm}| p{1.5cm}| p{1.8cm}| p{1.8cm}| p{2.2cm}|}
+      \hline
+      & \fkod{érk. idő}
+      & \fkod{CPU igény}
+      & \fkod{kezd. időpont}
+      & \fkod{bef. időpont}
+      & \fkod{várakozási idő}
+      \\ \hline
+      \fkod{P1} & \fkod{0} & \fkod{14} & \fkod{0} & \fkod{10} & \fkod{0} \\
+      \fkod{P2} & \fkod{7} & \fkod{8} & \fkod{10} & \fkod{18} & \fkod{3} \\
+      (\fkod{P1}) & \fkod{10} & \fkod{4} & \fkod{18} & \fkod{22} & \fkod{8} \\
+      \fkod{P3} & \fkod{11} & \fkod{36} & \fkod{22} & \fkod{32} & \fkod{11} \\
+      \fkod{P4} & \fkod{20} & \fkod{10} & \fkod{32} & \fkod{42} & \fkod{12} \\
+      (\fkod{P3}) & \fkod{32} & \fkod{26} & \fkod{42} & \fkod{52} & \fkod{10} \\
+      (\fkod{P3}) & \fkod{42} & \fkod{16} & \fkod{52} & \fkod{62} & \fkod{0} \\
+      (\fkod{P3}) & \fkod{52} & \fkod{6} & \fkod{62} & \fkod{68} & \fkod{0} \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  Jelen esetben az átlagos várakozási idő:
+  $\mathtt{44/4 = 11}$. (Az időszelet: \fkod{10})
 \end{document}
