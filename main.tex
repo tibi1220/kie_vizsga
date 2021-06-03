@@ -106,6 +106,53 @@
 \begin{document}
 
   \tableofcontents
+  \vspace{5em}
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[american, thick]
+      \tikzset{mux 4by2/.style={muxdemux,
+        muxdemux def={Lh=8, NL=4, Rh=5,
+        NB=2, w=3, square pins=1}}}
+      \tikzset{demux 2by4/.style={muxdemux,
+        muxdemux def={Lh=5, NL=1, Rh=8,
+        NR=4, NB=2, w=3, square pins=1}}}
+        
+      \draw
+      (0,0) node [mux 4by2] (mux1) {\kkod{MUX}}
+      (8,0) node [demux 2by4] (demux1) {\kkod{DEMUX}}
+      
+      (mux1.lpin 1) node [left=6](in1) {$D_0$}
+      (mux1.lpin 2) node [left=6](in2) {$D_1$}
+      (mux1.lpin 3) node [left=6](in3) {$D_2$}
+      (mux1.lpin 4) node [left=6](in4) {$D_3$}
+
+      (demux1.rpin 1) node [right=6](out1) {$D_0$}
+      (demux1.rpin 2) node [right=6](out2) {$D_1$}
+      (demux1.rpin 3) node [right=6](out3) {$D_2$}
+      (demux1.rpin 4) node [right=6](out4) {$D_3$}
+          
+      (mux1.bpin 1) node [below](ina) {$A$}
+      (mux1.bpin 2) node [below](inb) {$B$}
+
+      (demux1.bpin 1) node [below](outa) {$A$}
+      (demux1.bpin 2) node [below](outb) {$B$}
+
+      (in1.east) to (mux1.lpin 1)
+      (in2.east) to (mux1.lpin 2)
+      (in3.east) to (mux1.lpin 3)
+      (in4.east) to (mux1.lpin 4)
+
+      (out1.west) to (demux1.rpin 1)
+      (out2.west) to (demux1.rpin 2)
+      (out3.west) to (demux1.rpin 3)
+      (out4.west) to (demux1.rpin 4)
+
+      (ina.north) to (mux1.bpin 1)
+      (inb.north) to (mux1.bpin 2)
+
+      (mux1.rpin 1) to [short, l={$Y$}] (demux1.lpin 1);
+    \end{tikzpicture}
+  \end{figure}
   \pagebreak
   \subfile{section_01-05.tex}
   \pagebreak

@@ -22,7 +22,7 @@
   \fogalom{Logikai kapuk}
   \begin{figure}[H]
     \centering
-    \begin{circuitikz}[american]
+    \begin{circuitikz}[american, thick]
       \ctikzset{american or shape=roundy}
 
       \node [and port](myand) at (0,0) {};
@@ -156,7 +156,7 @@
   \begin{minipage}[c]{0.3\textwidth}
     \begin{figure}[H]
       \centering
-      \begin{circuitikz}[american]
+      \begin{circuitikz}[american, thick]
         \ctikzset{american or shape=roundy}
   
         \draw (0, 4)node[xor port] (xorone){}
@@ -209,13 +209,284 @@
 
   \vspace{2em}
   {\large \zkod{Teljes összeadó}:}
+  \begin{itemize}
+    \item feladata két bit és az előző helyi
+    értékből származó maradék összeadása
+
+    \item \fkod{bemenetek:} $A$, $B$, $C_{\mathrm{in}}$,
+    \fkod{kimenetek:} $S$, $C_{\mathrm{out}}$
+
+    \item $S
+    = \overline{A}\overline{B}{C}_\mathrm{in}
+    + \overline{A}{B}\overline{C}_\mathrm{in}
+    + {A}\overline{B}\overline{C}_\mathrm{in}
+    + {A}{B}{C_\mathrm{in}}$
+
+    \item $C
+    = \overline{A}{B}{C}_\mathrm{in}
+    + {A}\overline{B}{C}_\mathrm{in}
+    + {A}{B}\overline{C}_\mathrm{in}
+    + {A}{B}{C_\mathrm{in}}
+    = AB + BC_\mathrm{in} + AC_\mathrm{in}$
+  \end{itemize}
+
+  \vspace{2em}
+  {\large \zkod{Két négy bites szám összeadása}:}
+  \begin{itemize}
+    \item 4 teljes összeadó segítségével lehetséges
+  \end{itemize}
+
+  \pagebreak
+  {\large \zkod{Multiplexer}:}
+
+  \begin{minipage}[c]{0.2\textwidth}
+    \begin{figure}[H]
+      \centering
+      \begin{circuitikz}[american, thick]
+        \tikzset{mux 4by2/.style={muxdemux,
+          muxdemux def={Lh=5, NL=4, Rh=3,
+          NB=2, w=2, square pins=1}}}
+        
+          \draw (0,0) node [mux 4by2] (mux1) {}
+          
+          (mux1.lpin 1) node [left=6](in1) {$D_0$}
+          (mux1.lpin 2) node [left=6](in2) {$D_1$}
+          (mux1.lpin 3) node [left=6](in3) {$D_2$}
+          (mux1.lpin 4) node [left=6](in4) {$D_3$}
+          
+          (mux1.rpin 1) node [right](y) {$Y$}
+          
+          (mux1.bpin 1) node [below](a) {$A$}
+          (mux1.bpin 2) node [below](b) {$B$}
+
+          (in1.east) to (mux1.lpin 1)
+          (in2.east) to (mux1.lpin 2)
+          (in3.east) to (mux1.lpin 3)
+          (in4.east) to (mux1.lpin 4)
+
+          (a.north) to (mux1.bpin 1)
+          (b.north) to (mux1.bpin 2)
+
+          (y.west) to (mux1.rpin 1);
+      \end{circuitikz}
+    \end{figure}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.2\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $A$ & $B$ & $Y$
+        \\ \hline \hline
+        0 & 0 & $D_0$
+        \\ \hline
+        0 & 1 & $D_1$
+        \\ \hline
+        1 & 0 & $D_2$
+        \\ \hline
+        1 & 1 & $D_3$
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.6\textwidth}
+    \begin{itemize}
+      \item feladata több bemenő jel
+      közül az egyik kiválasztása
+      
+      \item $2^n$ db \fkod{bemenet}\\
+      $1$ db \fkod{kimenet}\\
+      $n$ db \fkod{vezérlőbemenet}
+      
+      \item lehet még párhuzamos–soros adatkonverter
+    \end{itemize}
+  \end{minipage}\hfill
   
+  \vspace{2em}
+  {\large \zkod{Demultiplexer}:}
+
+  \begin{minipage}[c]{0.2\textwidth}
+    \begin{figure}[H]
+      \centering
+      \begin{circuitikz}[american, thick]
+        \tikzset{demux 2by4/.style={muxdemux,
+        muxdemux def={Lh=3, NL=1, Rh=5,
+        NR=4, NB=2, w=2, square pins=1}}}
+        
+        \draw (0,0) node [demux 2by4] (demux1) {}
+        
+        (demux1.rpin 1) node [right=6](out1) {$D_0$}
+        (demux1.rpin 2) node [right=6](out2) {$D_1$}
+        (demux1.rpin 3) node [right=6](out3) {$D_2$}
+        (demux1.rpin 4) node [right=6](out4) {$D_3$}
+        
+        (demux1.lpin 1) node [left](y) {$Y$}
+        
+        (demux1.bpin 1) node [below](outa) {$A$}
+        (demux1.bpin 2) node [below](outb) {$B$}
+
+        (out1.west) to (demux1.rpin 1)
+        (out2.west) to (demux1.rpin 2)
+        (out3.west) to (demux1.rpin 3)
+        (out4.west) to (demux1.rpin 4)
+
+        (outa.north) to (demux1.bpin 1)
+        (outb.north) to (demux1.bpin 2)
+
+        (y.east) to (demux1.lpin 1);
+      \end{circuitikz}
+    \end{figure}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.2\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $A$ & $B$ & $Y$
+        \\ \hline \hline
+        0 & 0 & $D_0$
+        \\ \hline
+        0 & 1 & $D_1$
+        \\ \hline
+        1 & 0 & $D_2$
+        \\ \hline
+        1 & 1 & $D_3$
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.6\textwidth}
+    \begin{itemize}
+      \item egy jel kapcsolása választható kimenetre
+      
+      \item $1$ db \fkod{bemenet}\\
+      $2^n$ db \fkod{kimenet}\\
+      $n$ db \fkod{vezérlőbemenet}
+      
+      \item lehet még párhuzamos–soros adatkonverter
+    \end{itemize}
+  \end{minipage}\hfill
+
+
+  \vspace{2em}
+  {\large \zkod{Címdekóder}:}
+
+  \begin{minipage}[c]{0.35\textwidth}
+    \begin{figure}[H]
+      \centering
+      \begin{circuitikz}[american, thick]
+        \tikzset{decoder/.style={muxdemux,
+        muxdemux def={Lh=7, NL=3, Rh=7,
+        NR=8, NB=0, w=3.5, square pins=1}}}
+        
+        \draw (0,0) node [decoder] (decoder1) {\small \kkod{Decoder}}
+        
+        (decoder1.lpin 1) node [left](in1) {$A$}
+        (decoder1.lpin 2) node [left](in2) {$B$}
+        (decoder1.lpin 3) node [left](in3) {$C$}
+        
+        (decoder1.rpin 1) node [right](out1) {\footnotesize $D_0$}
+        (decoder1.rpin 2) node [right](out2) {\footnotesize $D_1$}
+        (decoder1.rpin 3) node [right](out3) {\footnotesize $D_2$}
+        (decoder1.rpin 4) node [right](out4) {\footnotesize $D_3$}
+        (decoder1.rpin 5) node [right](out5) {\footnotesize $D_4$}
+        (decoder1.rpin 6) node [right](out6) {\footnotesize $D_5$}
+        (decoder1.rpin 7) node [right](out7) {\footnotesize $D_6$}
+        (decoder1.rpin 8) node [right](out8) {\footnotesize $D_7$};
+      \end{circuitikz}
+    \end{figure}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.25\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|}
+        \hline
+        $A$ & $B$ & $C$ & $Y$
+        \\ \hline \hline
+        0 & 0 & 0 & $D_0$
+        \\ \hline
+        0 & 0 & 1 & $D_1$
+        \\ \hline
+        0 & 1 & 0 & $D_2$
+        \\ \hline
+        0 & 1 & 1 & $D_3$
+        \\ \hline
+        1 & 0 & 0 & $D_4$
+        \\ \hline
+        1 & 0 & 1 & $D_5$
+        \\ \hline
+        1 & 1 & 0 & $D_6$
+        \\ \hline
+        1 & 1 & 1 & $D_7$
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.4\textwidth}
+    \begin{itemize}
+      \item feladata cím dekódolása
+      
+      \item \fkod{bemenet:} $n$ bites szám
+      
+      \item \fkod{kimenet:} $2^n$-ből választ ki $1$-et
+    \end{itemize}
+  \end{minipage}\hfill
 
 
   \fogalom{Szekvenciális logikai hálózatok}
-  lorem
+  \zkod{Szekvenciális logikai hálózatok} esetén
+  a kimenet nemcsak a bemeneti jelkombinációtól,
+  hanem a hálózat állapotától is függ.
+  (azaz a a hálózatra megelőzően ható jelkombinációktól)
+  Léteznek \zkod{szinkron} (órajel) és \zkod{aszinkron}
+  sorrendi hálózatok.
+  
   \fogalom{Flip-flop}
-  lorem
+  \begin{minipage}[c]{0.25\textwidth}
+    \begin{figure}[H]
+      \centering
+      \begin{circuitikz}[american, thick]
+        \ctikzset{american or shape=roundy}
+
+        \node[nor port] (nor1) at (0, 1.2) {};
+        \node[nor port] (nor2) at (0,-1.2) {};
+
+        \draw (nor1.in 2) -| ++ (-0.3,-0.5) -- ++(2.15,-0.8) coordinate(a)|- (nor2.out);
+        \draw (nor2.in 1) -| ++ (-0.3, 0.5) -- ++(2.15, 0.8) |- (nor1.out);
+
+        \draw (nor1.out -| a) to [short, *-] ++(0.45,0) node[right]{$Q$};
+        \draw (nor2.out -| a) to [short, *-] ++(0.45,0) node[right]{$\overline{Q}$};
+
+        \draw (nor1.in 1) -- ++ (-.5, 0) node[left]{$S$};
+        \draw (nor2.in 2) -- ++ (-.5, 0) node[left]{$R$};
+      \end{circuitikz}
+    \end{figure}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.25\textwidth}
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $S$ & $R$ & $Q$
+        \\ \hline \hline
+        0 & 0 & prev
+        \\ \hline
+        0 & 1 & 0
+        \\ \hline
+        1 & 0 & 1
+        \\ \hline
+        1 & 1 & ?
+        \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.5\textwidth}
+    \begin{itemize}
+      \item elemi sorrendi hálózatok
+      
+      \item két stabil állapotú billenő elemek
+      
+      \item állapotuk megegyezik a kimenettel
+      
+      \item alkalmazásuk:
+    \end{itemize}
+  \end{minipage}\hfill
 
 
   % ----------------------------------------------------------------------------
@@ -224,7 +495,39 @@
   \section{Tétel – A számítógép architektúrák alapjai} %12
 
   \fogalom{A számítógép felépítése}
-  lorem
+  \begin{itemize}
+    \item \zkod{Hardver} \tabto{2cm} – \tabto{2.6cm}
+    elektromos áramkörök, mechanikus berendezések, \\
+    \tabto{2.6cm}kábelek, csatlakozók, perifériák \\
+    \tabto{2.6cm}önmagában nem működőképesek
+    
+    \item \zkod{Szoftver} \tabto{2cm} – \tabto{2.6cm}
+    számítógépet működőképessé tevő
+    programok és azok dokumentációi
+
+    \item \zkod{Firmware} \tabto{2cm} – \tabto{2.6cm}
+    célprogram, mikrokóddal írt, készülék spacifikus, \\
+    \tabto{2.6cm}hardverbe ágyazott szoftver,
+    gyakran \zkod{Flash ROM}
+  \end{itemize}
+
+  A \zkod{digitális számítógép} olyan gép,
+  amely a neki címzett \zkod{utasítás}ok alapján
+  problémákat old meg. Az utasítássorozatot,
+  amely leírja, hogy hogyan oldjunk meg egy feladatot,
+  \zkod{program}nak nevezünk.
+
+  \vspace{1em}
+  {\large \zkod{Gépi, nyelvi szintek}:}
+  \begin{enumerate}
+    \setcounter{enumi}{-1} 
+    \item 
+    \item b
+    \item c
+  \end{enumerate}
+
+  
+  
   \fogalom{Memóriák}
   lorem
   \fogalom{CPU részei}
