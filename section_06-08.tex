@@ -51,6 +51,14 @@
   A választ \zkod{véges számú lépés} után mindenképpen megkapjuk.
   Egy \zkod{véges utasítássorozat}, amely bármely input esetén
   véges lépésszám után megáll, eredményt ad.
+  Minden algoritmus leírható a az alábbi logikai struktúrákkal.
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item rákövetkeztetés \\ (\zkod{konkatenáció})
+      \item választás \\ (\zkod{alternáció})
+      \item ciklus \\ (\zkod{iteráció})
+    \end{itemize}
+  \end{multicols}
   Maga a Turing gép matematikai leírása az algoritmus
   fogalmának formális definíciója.
   Minden probléma, amelyre eljárás,
@@ -58,20 +66,22 @@
   Az ember azokra és csakis azokra a kérdésekre tud választ adni,
   amelyekre a Turing-gép is képes.
   A tartalmazás kérdése algoritmikusan eldönthetetlen.
-  \begin{itemize}
-    \item \zkod{bejárás} – elemek keresése
-    
-    \item \zkod{keresés} - adott értéknek megfelelő elemek kiválasztása
-    
-    \item \zkod{beszúrás} - új adat beillesztése
-    
-    \item \zkod{törlés} - adatelem eltávolítása
-    
-    \item \zkod{rendezés} - elemeket logikai sorrendbe
-    
-    \item \zkod{összeválogatás} - különböző rendezett
-    adathalmazokból új elemhalmaz kialakítása
-  \end{itemize}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item \zkod{bejárás} – elemek keresése
+      
+      \item \zkod{keresés} – adott értéknek megfelelő elemek kiválasztása
+      
+      \item \zkod{beszúrás} – új adat beillesztése
+      
+      \item \zkod{törlés} – adatelem eltávolítása
+      
+      \item \zkod{rendezés} – elemeket logikai sorrendbe
+      
+      \item \zkod{összeválogatás} – különböző rendezett
+      adathalmazokból új elemhalmaz kialakítása
+    \end{itemize}
+  \end{multicols}
 
 
   % ----------------------------------------------------------------------------
@@ -95,6 +105,8 @@
     
     \item az elemekre \zkod{indexhalmazzal} hivatkozunk
     
+    \item az elemeket egymást követő memóriahelyek tárolják
+
     \item az elemekhez bejárás nélkül férünk hozzá
   \end{itemize}
 
@@ -108,7 +120,7 @@
       \zkod{kapcsolómezőnek hívjuk}
     \end{itemize}
 
-    \item a \zkod{kétirányó listák} mindkét irányban bejárhatóak
+    \item a \zkod{kétirányú listák} mindkét irányban bejárhatóak
     
     \item a \zkod{ciklikusan kapcsolt listák} nem rendelkeznek
     első és utolsó elemmel, hiszen az "első" az "utolsóra" mutat

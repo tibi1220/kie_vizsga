@@ -52,6 +52,9 @@
     \item felügyelje a több felhasználó által egy
     időben történő hozzáférését
 
+    \item 3 fajta \zkod{input} \tabto{4.5cm} – \tabto{5.5cm}
+    lekérdezések, módosítások, sémamódosítások
+
     \item \zkod{adatintegritás} \tabto{4.5cm} – \tabto{5.5cm}
     érvényesség, helyesség, ellentmondás-mentesség
     
@@ -273,7 +276,6 @@
   egy vagy többoperandusúak. Az előbbit egy, az
   utóbbit pedig több reláción végezzük el.
 
-  \vspace{1em}
   \begin{minipage}[t]{0.5\textwidth}
     \begin{itemize}
       \item \zkod{szelekció} (kiválasztás) \\
@@ -307,6 +309,7 @@
     \end{itemize}
   \end{minipage}
 
+  \vspace{1em}
   Az azonosítás történhet \zkod{kulcs} alapján,
   amely egyértelműen azonosítja az egyedet az egyedhalmazon belül.
   Amennyiben egyetlen attribútumból áll, akkor \zkod{egyszerű},
@@ -414,7 +417,7 @@
   {\large \zkod{Adatok lekérdezése}}:
   \begin{itemize}
     \item \kkod{SELECT} \fkod{culomn1, column2, \dots}
-    \kkod{FROM} \fkod{table\textunderscore{}name1, table\textunderscore{}name,}
+    \kkod{FROM} \fkod{table\textunderscore{}name1, table\textunderscore{}name2,}
     \kkod{WHERE} \fkod{cond;}
 
     \vspace{.5em}
