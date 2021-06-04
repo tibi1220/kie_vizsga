@@ -237,13 +237,212 @@
   \section{Tétel – Az információelmélet alapjai} %16
 
   \fogalom{Forráskódolás}
-  lorem
+  {\large \zkod{Kódszavak átlagos szóhossza}:}
+  \vspace{.5em}
+
+  Az olyan $f: A \rightarrow \mathcal{B}$ kódokat,
+  melyek különböző $A$-beli szimbólumokhoz más-más
+  hosszúságú kódszavakat rendelnek, \zkod{változó}
+  szóhosszúságú kódoknak nevezzük.
+  $f(A_i) = B^{(1)} \; B^{(2)} \; \dots \; B^{(\ell_i)}$
+  $\mathcal{B}$-beli sorozat (kódszó) hossza: ${\ell_i}$.
+  Egy $f$ kód \zkod{átlagos szóhossza} $\ell_i$:
+  \zkod{várható értéke}
+  \begin{equation*}
+    L(A) = \sum_{i=1}^n p(A_i) \cdot \ell_i =
+    \sum_{i=1}^n p_i \cdot\ell_i
+  \end{equation*}
+
+  {\large \zkod{Shannon forráskódolási tétele}:}
+  \vspace{.5em}
+  
+  Minden $A = \left\{ A_1, A_2, \dots , A_n \right\}$
+  véges forrásábcéjű forráshoz található olyan $s$ elemű
+  kódábécével rendelkező $f: A \rightarrow \mathcal{B}$
+  kód, amely az egyes forrásszimbólumokhoz rendre
+  $\ell_1, \ell_2, \dots, \ell_n$ szóhosszúságú szavakat
+  rendel, és \dots
+  \begin{equation*}
+    \frac{H(A)}{\log_2(s)}
+    \leq L(A)
+    < \frac{H(A)}{\log_2(s)} + 1
+  \end{equation*}
+  Az olyan kódok, melyekre ez teljesül, azok \zkod{optimális kód}ok.
+  
+  \pagebreak
+  {\large \zkod{Forráskódolás}:}
+  \vspace{.5em}
+  A jól tömöríthető eljárásokra igaz, hogy ha $p_i \geq p_j$,
+  akkor $\ell_i \leq \ell_j$. Ha az $f$ \zkod{bináris} kód prefix,
+  akkor \dots
+  \begin{itemize}
+    \item a leggyakoribb forrásábécébeli elemhez
+    fog a legrövidebb kódszó tartozni
+
+    \item a második leggyakoribbhoz eggyel hosszabb kódszó
+    
+    \item \dots
+    
+    \item a két legritkábban előforduló betáhöz
+    pedig azonosan hosszú kódszó fog tartozni,
+    és csak az utolsó karakterben fog e két szó különbözni
+  \end{itemize}
+
+
   \fogalom{Huffman-kód}
-  lorem
+  A \zkod{Huffman-kód} a legrövidebb átlagos
+  szóhosszú \zkod{bináris prefix} kód.
+  \begin{enumerate}
+    \item valószínűségek szerint sorba rendez
+    
+    \item a két legkisebb valószínűséhű szimbólumot
+    összevonja. Az összevont szimbólum valószínűsége
+    az eredeti két valószínűség összege.
+
+    \item az első 2 lépés ismételgetése
+    
+    \item a kapott gráf minden csomópontja előtti
+    két élt megcímkézi $0$-val és $1$-gyel
+
+    \item a kódfa \zkod{gyöker}étől elindulba megkeresi
+    az adott szimbólumhoz tartozó útvonalat, kiolvassa
+    az éleknek megfelelő biteket. A kapott bitsorozatot
+    rendeli a szimbólumhoz kódszóként.
+  \end{enumerate}
+
+
   \fogalom{Csatornakódolás}
-  lorem
+  $\mathbb{C}^n$ vektortér, $\vb*{c} \in \mathbb{C}^n$
+  és $\vb*{v} \in \mathbb{C}^n$ vektorok. A csatorna a rá
+  bocsájtptt $\vb*{c} = c^{(1)}, c^{(2)}, \dots, c^{(n)}$
+  szimbólumsorozatból egy $\vb*{v} = v^{(1)}, v^{(2)},
+  \dots, v^{(n)}$ szimbólumsorozatot csinál.
+
   \fogalom{Hamming-távolság}
-  lorem
+  A \zkod{Hamming-távolság} $\vb*{c}$ és $\vb*{v}$
+  eltérésének mérésére definiált távolság. Alatta
+  azon $i$ pozíciók számát értjük, ahol
+  $c^{(i)} \neq v^{(i)}$.
+  Jele: $\mathrm{d}\left( \vb*{c}, \vb*{v} \right)$.
+  Teljesülnek az alábbiak:
+  \begin{equation*}
+    \mathrm{d}\left( \vb*{c}, \vb*{v} \right) \geq 0,
+    \hspace{3em}
+    \mathrm{d}\left( \vb*{c}, \vb*{c} \right) = 0
+    \hspace{3em}
+    \mathrm{d}\left( \vb*{c}, \vb*{v} \right) =
+    \mathrm{d}\left( \vb*{v}, \vb*{c} \right)
+    \hspace{3em}
+    \mathrm{d}\left( \vb*{c}, \vb*{v} \right) \leq
+    \mathrm{d}\left( \vb*{c}, \vb*{w} \right) +
+    \mathrm{d}\left( \vb*{w}, \vb*{v} \right) 
+  \end{equation*}
+
+
   \fogalom{Hibajelzés}
-  lorem
+  Az \zkod{egyszerű hibázás} esetén nem tudjuk,
+  hogy melyik pozíciókban rontott a csatorna,
+  csak azt, hogy hány darab hiba van.
+  \zkod{törléses hiba} esetén ismerjük
+  a hibázások helyét is, csak azt nem,
+  hogy mennyire romlott el azokon a helyeken a jel.
+
+  \vspace{.5em}
+  Legyen $K$ a lehetséges kódszavak halmaza. Ekkor
+  egy $K$ kód kódtávolsága a kódszavak közötti
+  \zkod{Hamming-távolság} minimuma.
+  \begin{equation*}
+    d_\mathrm{{min}} = \min_{
+      \vb*{c} \neq \vb*{c'};\vb*{c}, \vb*{c'} \in K
+    } \left\{ \mathrm{d} \left( \vb*{c}, \vb*{c'} \right) \right\}
+  \end{equation*}
+  \zkod{Hibajelzés} lehetséges, ha a $\vb*{c}$ kódszavunkból
+  keletkezett $\vb*{v}$ nem egy másik érvényes kódszó. Ha $\nu$
+  a hibák száma, akkor $\nu < d_\mathrm{min}$ hibát lehet mindenképp
+  jelezni. Hibajelzés után általában megismétlik az üzenetet.
+
+  \vspace*{1em}
+  {\large \zkod{Törléses hiba javítása}:}
+  \vspace{.5em}
+
+  Ebben az esetben tudjuk a hibák helyét tudjuk a hibák helyét.
+  A $\vb*{v}$ hibásan vett vektort abba a kódszóba javítjuk,
+  amelyik a hibás pozícióktól eltekintve azonos $\vb*{v}$-vel.
+  Ha több ilyen van, nem tudunk javítani.
+  Ha a két legközelebbi kódszóból $d_\mathrm{min}$ komponenst
+  a megfelelő helyről törlünk, akkor azonos maradékot kapunk,
+  ennél kevesebb elem törlésével sehogy sem kaphatunk azonos
+  maradékot. Így $\nu \leq d_\mathrm{min} - 1$ törléses hiba javítható.
+
+  \vspace*{1em}
+  {\large \zkod{Törléses hiba javítása}:}
+  \vspace{.5em}
+
+  Ebben az esetben nem tudjuk a hibák helyét.
+  A $\vb*{v}$ hibás vett vektort abba a $\vb*{c}$
+  szóba javítjuk amelyre $\mathrm{d} \left\{
+    \vb*{c}, \vb*{v}
+  \right\}$ a legkisebb. Ha több ilyen van,
+  akkor nem tudunk javítani. A javítóság feltétele:
+  \begin{equation*}
+    \mathrm{d} \left( \vb*{c}, \vb*{v} \right)
+    < \mathrm{d} \left( \vb*{c'}, \vb*{v} \right)
+    \hspace*{1.5em} \rightarrow \hspace*{1.5em}
+    \nu \leq \frac{d_\mathrm{min} - 1}{2}
+  \end{equation*}
+
+  \fogalom{Valszám alapok}
+  \begin{itemize}
+    \item \zkod{ellentett esemény}
+    – kísérlet minden $A$-n kívüli eseménye
+    
+    \item \zkod{valószínűség}
+    – $p(A)$
+    
+    \item \zkod{szorzat}
+    – együttes bekövetkezési valószínűség
+    
+    \item \zkod{összeg}
+    – vagylagos bekövetkezési valószínűség
+    
+    \item ha $A$ és $B$ \zkod{függetlenek}
+    – $p(A \cdot B) = p(A) \cdot p(B)$
+    
+    \item ha $A$ és $B$ \zkod{függők}
+    \tabto{3.8cm} – \tabto{4.4cm} $p(A \cdot B) \leq p(A) \cdot p(B)$ \\[1mm]
+    \tabto{3.8cm} – \tabto{4.4cm} $p(A+B) = p(A) + p(B) - P(A \cdot B)$
+    
+    \item \zkod{feltételes valószínűség}
+    \begin{itemize}
+      \item $p \left( A|B \right) = \dfrac{P(A \cdot B)}{p(B)}$
+      \tabto{4cm} - \tabto{4.6cm}
+      Ha $B$ jelet vettünk, akkor annak a valószínűsége,
+      \\ \tabto{4.6cm}
+      hogy $A$ jel volt a csatorna bemenetén
+      \item $p \left( B|A \right) = \dfrac{P(A \cdot B)}{p(A)}$
+      \tabto{4cm} - \tabto{4.6cm}
+      ha $A$ jelet adok, milyen $B$ kerül a csatorna kimenetére
+    \end{itemize}
+    
+    \item \zkod{várható érték} \hspace{.2em} – \hspace{.2em}
+    $\left\langle A \right\rangle
+    = \displaystyle \sum_{i=1}^m p_i \cdot A_i$
+
+    \item \zkod{szórás} \hspace{.2em} – \hspace{.2em}
+    $D(A) = \displaystyle\sqrt{
+      \left\langle \left(
+        A - \left\langle A \right\rangle
+      \right)^2\right\rangle
+    }$
+
+    \item \zkod{korreláció} \hspace{.2em} – \hspace{.2em}
+    $R \left(A, B\right) = \dfrac{\left\langle
+      (A - \left\langle A \right\rangle)
+      \cdot (B - \left\langle B \right\rangle)
+    \right\rangle}{
+      D(A) \cdot D(B)
+    }$
+
+  \end{itemize}
+  
 \end{document}
