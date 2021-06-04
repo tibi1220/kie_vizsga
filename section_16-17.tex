@@ -7,17 +7,228 @@
   \section{Tétel – Az információelmélet alapjai} %16
 
   \fogalom{Shannon hírközlési modellje}
-  lorem
+  A hírközlés során egy üzenetet juttatunk el
+  egy tér- és időbeli pontból egy másikba.
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.88]
+      \draw[thick, fill=yellow!20] (0 ,0) rectangle ++ (3,1)
+      node[midway]{\fkod{forrás/adó}};
+
+      \draw[thick, fill=orange!20] (4 ,0) rectangle ++ (3,1)
+      node[midway]{\fkod{kódoló}};
+
+      \draw[thick, fill=bgreen!20] (8 ,0) rectangle ++ (3,1)
+      node[midway]{\fkod{csatorna}};
+
+      \draw[thick, fill=orange!20] (12,0) rectangle ++ (3,1)
+      node[midway]{\fkod{dekódoló}};
+
+      \draw[thick, fill=yellow!20] (16,0) rectangle ++ (3,1)
+      node[midway]{\fkod{vevő/nyelő}};
+
+      \draw[thick, ->] (3,.5) -- ++(1,0) node[above, pos=.5] {$b$};
+      \draw[thick, ->] (7,.5) -- ++(1,0) node[above, pos=.5] {$c$};
+      \draw[thick, ->] (11,.5) -- ++(1,0) node[above, pos=.5] {$y$};
+      \draw[thick, ->] (15,.5) -- ++(1,0) node[above, pos=.5] {$z$};
+
+      \begin{scope}[xshift=0cm, yshift=-6.833cm]
+        \draw[thick, fill=yellow!10, rounded corners=10]
+          (0 ,1) rectangle ++ (10, 5);
+        
+        \draw[thick, fill=teal!20] (0.5 ,3.5) rectangle ++ (2.5, 2)
+          node[midway, text width=2.2cm, align=center]
+          {\fkod{tényleges forrás}};
+        
+        \draw[thick, fill=teal!20] (4.5 ,3.5) rectangle ++ (3.7, 2)
+          node[midway, text width=4cm, align=center]
+          {\fkod{mintavételezés kvantálás forráskódolás}};
+
+        \draw[thick, ->] (3,4.5) -- ++(1.5,0) node[above, pos=.5] {$a$};
+        \draw[thick, ->] (8.2,4.5) -- ++(1.5,0) node[above, pos=.5] {$b$};
+        
+        \draw node[text width=2.5cm, align=center] at(1.75, 2.25)
+          {lehet folytonos jel};
+
+        \draw node[text width=5cm, align=center] at(6.35, 2.25)
+          {a forrás jelét diszkrét \\ jellé alakítja, tömöríti};
+      \end{scope}
+
+      \begin{scope}[xshift=11cm, yshift=-6.833cm]
+        \draw[thick, fill=orange!10, rounded corners=10]
+          (0 ,1) rectangle ++ (8, 5)
+          node[midway, text width=6cm, align=justify]
+          {a \fkod{csatornakódolás} (hibajavító)
+          lehetővé teszi a zajos csatornán való biztonságos(abb)
+          üzenetátvitelt, a keletkező hibák jelzését és javítását};
+      \end{scope}
+      
+      \begin{scope}[xshift=0cm, yshift=-11.666cm]
+        \draw[thick, fill=bgreen!10, rounded corners=10]
+          (0 ,0) rectangle ++ (19, 5);
+
+        \draw[thick, fill=teal!20] (2.5 ,3) rectangle ++ (3.5, 1.5)
+          node[midway, text width=2.2cm, align=center]
+          {\fkod{modulátor}};
+        
+        \draw[thick, fill=teal!20] (7.75 ,3) rectangle ++ (3.5, 1.5)
+          node[midway, text width=4cm, align=center]
+          {\fkod{csatorna}};
+
+        \draw[thick, fill=teal!20] (13 ,3) rectangle ++ (3.5, 1.5)
+          node[midway, text width=3cm, align=center]
+          {\fkod{demodulátor, döntő}};
+
+        \draw[thick, ->] (.5, 3.75) -- ++(2   , 0) node[above, pos=.5] {$c$};
+        \draw[thick, ->] (6 , 3.75) -- ++(1.75, 0) node[above, pos=.5] {};
+        \draw[thick, ->] (11.25, 3.75) -- ++(1.75, 0) node[above, pos=.5] {$x$};
+        \draw[thick, ->] (16.5, 3.75) -- ++(2, 0) node[above, pos=.5] {$y$};
+        
+        \draw[thick, ->] (9.5, 2) -- ++(0, 1)
+          node[above, pos=.5, rotate=90] {zaj}
+          node[below, pos=0, yshift=-.15cm]{torzul a jel};
+
+        \draw node[text width=4cm, align=center] at(4.25, 1.5)
+          {átalakítja a kódolt üzenetet a csatornán átvihető jellé};
+
+        \draw node[text width=4cm, align=center] at(14.75, 1.5)
+          {eldönti, hogy a lehetséges leadott
+          jelalakok közül melyiket adhatták};
+      \end{scope}
+
+      \begin{scope}[xshift=0cm, yshift=-17.5cm]
+        \draw[thick, fill=orange!10, rounded corners=10]
+          (0 ,0) rectangle ++ (6, 5)
+          node[midway, text width=4cm, align=justify]
+          {a \fkod{dekódoló} kijavítja, és / vagy jelzi a vett jelek hibáit.
+          Elvégzi a \fkod{csatornakódolás} inverz műveletét.};
+      \end{scope}
+      
+      \begin{scope}[xshift=7cm, yshift=-17.5cm]
+        \draw[thick, fill=yellow!10, rounded corners=10]
+          (0 ,0) rectangle ++ (12, 5);
+        
+        \draw[thick, fill=teal!20] (2.5 ,2.5) rectangle ++ (4, 2)
+          node[midway, text width=3cm, align=center]
+          {\fkod{forráskódolás inverze}};
+        
+        \draw[thick, fill=teal!20] (8.5 ,3) rectangle ++ (2, 1)
+          node[midway, text width=4cm, align=center]
+          {\fkod{vevő}};
+
+        \draw[thick, ->] (.5,3.5) -- ++(2,0) node[above, pos=.5] {$z$};
+        \draw[thick, ->] (6.5,3.5) -- ++(2,0) node[above, pos=.5] {$a'$};
+
+        \draw node[text width=4cm, align=center] at(4.5, 1.5)
+          {a helyreállított üzenetet \fkod{kitömöríti}};
+
+        \draw node[text width=2.5cm, align=center] at(9.5, 1.5)
+          {\fkod{értelmezi} az üzenetet};
+      \end{scope}
+    \end{tikzpicture}
+  \end{figure}
+
   \fogalom{Az információ}
-  lorem
+  Az \zkod{információ} valamely véges számú, előre ismert esemény
+  közüé annak a megnevezése, hogy melyik következett be.
+  Értéke azonos azzal a \zkod{bizonytalanság}gal, melyet megszűntet.
+  
+  \vspace{1em}
+  {\large \zkod{Hartley}:}
+  \vspace{.5em}
+  
+  $m$ számú, azonos valúszínűségű esemény közül
+  egy megnevezésével nyert információ.
+  \begin{equation*}
+    I = \log_2(m)
+  \end{equation*}
+
+  \vspace{1em}
+  {\large \zkod{Shannon}:}
+  \vspace{.5em}
+  
+  Shannon szerint minél váratlanabb az esemény, bekövetkezése
+  annál több információt jelent. Legyen
+  $A = \left\{ A_1, A_2, \dots, A_m \right\}$,
+  $A_i$ esemény valószínűsége $p_i$.
+  Az $A_i$ esemény megnevezésével nyert információ ekkor:
+  \begin{equation*}
+    I \left( A_i \right) = -\log_2 \left( p_i \right)
+  \end{equation*}
+  
   \fogalom{Az entrópia}
-  lorem
+  Az \zkod{entrópia} az információ várható értéke.
+  \begin{equation*}
+    H(p_1, p_2, \dots, p_m) = 
+    \left\langle I(A) \right\rangle =
+    \sum_{i=1}^m p_i \cdot I \left( A_i \right) =
+    - \sum_{i=1}^m p_i \cdot \log_2(p_i)
+  \end{equation*}
+  Az entrópia tulajdonképpen annak a kijelentésnek az információtartalma,
+  hogy az $m$ db egymást kizáró esemény közül az egyik bekövetkezett.
+
   \fogalom{Forráskódok}
-  lorem
+  \begin{itemize}
+    \item a \zkod{forrás} kimenetén véges sok
+    elemből álló $A = \left\{ A_1, A_2, \dots, A_m \right\}$ halmaz
+    elemei jelenhetnek meg
+
+    \item \zkod{forrásábcé} – maga az $A$ halmaz
+    
+    \item \zkod{üzenet} – az $A$ elemeiből képzett véges
+    $A^{(1)} \; A^{(2)} \; \dots \; A^{(m)}$ sorozatok
+
+    \item $\mathcal{A}$ – a lehetséges üzenetek halmaza
+    
+    \item a kódolt üzenetek egy
+    $B = \left\{ B_1, B_2, \dots, B_s \right\}$
+    szintén véges halmaz elemeiből épülnek fel
+
+    \item \zkod{kódábécé} – maga a $B$ halmaz
+    
+    \item \zkod{kódszavak} – a $B$ elemeiből képzett véges
+    $B^{(1)} \; B^{(2)} \; \dots \; B^{(s)}$ sorozatok
+
+    \item $\mathcal{B}$ – a lehetséges kódszavak halmaza
+    
+    \item az $f: A \rightarrow \mathcal{B}$ illetve
+    $F: \mathcal{A} \rightarrow \mathcal{B}$ függvényeket
+    \zkod{forráskód}oknak nevezzük. Az $f$ leképezés
+    a forrás egy-egy szimbólumához rendel egy-egy szót.
+  \end{itemize}
+  
   \fogalom{Egyértelműen dekódolható kódok}
-  lorem
+  Egy $f$ forráskód \zkod{egyértelműen dekódolható},
+  ha minden egyes $B$-beli sorozatot csak egyféle
+  $A$-beli sorozatból állít elő, azaz a neki
+  megfelelő $F$ invertálható. Nem elég, hogy $f$
+  invertálható legyen.
+  \begin{itemize}
+    \item $! \; A = \left\{a, b, c\right\}$, $B = \left\{ 0, 1\right\}$
+    és $f(a) = 0$, $f(b) = 1$, $f(c) = 01$. Ekkor $f$ invertálható,
+    de a 01 kódszót dekódolhatjuk $f(a) f(b) = 01$ ezerint $ab$-nek,
+    vagy $f(c)=01$ szerint $c$-nek is.
+  \end{itemize}
+  Az \zkod{állandó kódszóhosszú}
+  kódok egyértelműen dekódolhatóak, megfejthetőek,
+  de nem elég gazdaságosak.
+
   \fogalom{Prefix kód}
-  lorem
+  Az $f$ kód \zkod{prefix}, ha a lehetséges kódszavak közül
+  egyik sem folytatása a másiknak, vagyis bármely kódszó
+  végéből bármekkora szegmenst levágva nem kapunk egy másik
+  kódszót. Prefix kód \zkod{egyértelműen dekódolható}.
+  \begin{itemize}
+    \item $! \; A = \left\{a, b, c\right\}$, $B = \left\{ 0, 1\right\}$
+    és $f(a) = 0$, $f(b) = 10$, $f(c) = 110$. Ha az $abccab$ üzenetet
+    kódoljuk, akkor a $010110110010$ kódsorozatot kapjuk. A kódból
+    az üzenet visszafejtése nagyon egyszerű a prefix tulajdonság miatt.
+
+    \item  $! \; A = \left\{a, b, c, d\right\}$, $B = \left\{ 0, 1\right\}$
+    és $f(a) = 0$, $f(b) = 01$, $f(c) = 011$, $f(d)=0111$.
+    Ez a kód nem prefix, de egyértelműen dekódolható, hiszem a $0$
+    karakter egy új kódszó kezdetét jelzi.
+  \end{itemize}
 
 
   % ----------------------------------------------------------------------------
@@ -31,7 +242,7 @@
   lorem
   \fogalom{Csatornakódolás}
   lorem
-  \fogalom{Hamming- távolság}
+  \fogalom{Hamming-távolság}
   lorem
   \fogalom{Hibajelzés}
   lorem
