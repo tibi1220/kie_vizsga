@@ -167,7 +167,10 @@
     
     \item az utód neve leszármazott osztály (\kkod{derived/child class})
     
-    \item konstruktor, destruktor, barát függvények nem öröklődnek
+    \item konstruktor, destruktor, barát függvények, illetve
+    az \kkod{operator=} túlterhelése nem öröklődnek,
+    öröklődnek viszont az adattagok, tagfüggvények és
+    a többi túlterhelt operátor
   \end{itemize}
 
 
@@ -351,7 +354,7 @@
     // Array
     #include <array>
 
-    array<typename, size> myArr { {myVar1, myVar2, myVar3} };
+    array<type, size> myArr { {myVar1, myVar2, myVar3} };
 
     myArr[0] = 12; // feltoltes [] operatorral, bejarhato for ciklussal
 
@@ -361,19 +364,35 @@
     swap(); fill(); reverse(); accumulate();  // muveletek
   \end{lstlisting}
 
+  Az allokátorobjectumok (\kkod{allocator})a tárolók számára
+  lefoglalt memóriaterületet kezelik.
+  \begin{lstlisting}
+    // Allocator
+    #include <memory>
+
+    allocator<type> myAlloc;
+
+    allocate(<size_t> n);
+    construct(<pointer> p, <const reference> r);
+    deallocate(<pointer> p, <size_t> n);
+    destroy();
+  \end{lstlisting}
+
   A \kkod{vector} dinamikus tömbökkel megvalósított soros tároló.
   Folytonos adatterületen pointerrel és bejáróval is bejárható.
   Automatikusan növekszik és csökken a tárolási mérete.
   Az elemek könnyen elérhetők pozíció alapján. (állandó idővel)
   Elemek sorban bejárhatóak (lineáris idővel)
   Elemek illeszthetők/törölhetők a végéről. (konstans idővel)
+  Elemek be is illeszthetőek/törölhetőek, de erre más tárolók
+  (\kkod{deque}, \kkod{list}) jobb időt produkálnak.
   \begin{lstlisting}
     // Vector
     #include <vector>
 
-    vector<typename> myVector1 (count, myVar);
-    vector<typename> myVector2 (myVector1.begin(), myVector1.end());
-    vector<typename> myVector3 (myVector1);
+    vector<type> myVector1 (count, myVar);
+    vector<type> myVector2 (myVector1.begin(), myVector1.end());
+    vector<type> myVector3 (myVector1);
 
     begin(); end(); rbegin(); rend();   // bejarok
     []; at(); front(); back();          // tulajdonsagok
@@ -389,7 +408,7 @@
     for(auto& i : myVec);
   \end{lstlisting}
 
-  A \kkod{string} is \kkod{STL} tároló
+  A \kkod{string} is \kkod{STL} tároló.
   \begin{lstlisting}
     // string
     #include <string>
@@ -401,25 +420,29 @@
     find(); find_first(); insert(); replace();
   \end{lstlisting}
 
-  A \kkod{deque} egy kétvégű sor. 
+  A \kkod{deque} egy kétvégű sor,
+  amely mindkét végén növelhető.
+  Konstans idő alatt adhatunk hozzá,
+  illetve távolíthatunk el elemet a sor végeiről.
   Nem folytonos adatterületen helyezkedik el.
   (nincs \kkod{capacity()} és \kkod{reverse()})
   Egydimenziós tömböt tartalmazó listában tárolódik.
   Az elemek könnyen elérhetőek pozíció alapján. (állandó idővel)
   (\kkod{[]}, \kkod{at()}, \kkod{front()}, \kkod{back()})
   Elemek sorban bejárhatóak. (lineáris idővel)
-  Lassabb, mint a sor.
+  Lassabb, mint a sor. (\kkod{queue})
   
   \vspace{1em}
   \begin{lstlisting}
     // deque
     #include <deque>
 
-    deque<typename> myDQ1(count, myVar);
-    deque<typename> myDQ2{myVar1, myVar2, ...};
-    deque<typename> myDQ3(myDQ1.begin(), myDQ1.end());
-    deque<typename> myDQ4(myDQ1);
+    deque<type> myDQ1(count, myVar);
+    deque<type> myDQ2{myVar1, myVar2, ...};
+    deque<type> myDQ3(myDQ1.begin(), myDQ1.end());
+    deque<type> myDQ4(myDQ1);
     
+    // Konstans idovel elem hozzaadasa
     push_front(); pop_front();
     push_back(); pop_back();
   \end{lstlisting}
@@ -440,6 +463,10 @@
   esetén nincsen \kkod{push{}\textunderscore{}back()} és
   \kkod{pop{}\textunderscore{}back()}, viszont van
   \kkod{insert{}\textunderscore{}after()}.
+  \begin{lstlisting}
+    // forward_list
+    #include <forward_list>
+  \end{lstlisting}
 
   \fogalom{Asszociatív tárolók}
   Az asszociatív tárolók (\kkod{map}, \kkod{set})
@@ -450,10 +477,10 @@
     // set
     #include <set>
 
-    typename array[] = {var1, var2, var3}
-    set<typename> mySet1(array, array+3)
-    set<typename> mySet2(mySet1.begin(), mySet1.end())
-    set<typename> mySet3(mySet1)
+    type array[] = {var1, var2, var3}
+    set<type> mySet1(array, array+3)
+    set<type> mySet2(mySet1.begin(), mySet1.end())
+    set<type> mySet3(mySet1)
 
     begin(); end(); rbegin(); rend();
     ::iterator; size(); max_size(); insert();
@@ -468,13 +495,62 @@
     // map
     #include<map>
 
-    map<typename1, typename2> myMap1;
-    map<typename1, typename2> myMap2(myMap1.begin(), myMap1.end());
-    map<typename1, typename2> myMap3(myMap1);
+    map<type1, type2> myMap1;
+    map<type1, type2> myMap2(myMap1.begin(), myMap1.end());
+    map<type1, type2> myMap3(myMap1);
 
     begin(); end(); rbegin(); rend();
     ::iterator; size(); max_size(); insert();
     empty(); erase(); clear(); find();
+  \end{lstlisting}
+
+  Léteznek kulcsismétlést megengedő változatok
+  (\kkod{multiset}, \kkod{multimap}),
+  a keresés ebben az esetben lineáris végrehajtási idejű.
+  Mindegyiknek van rendezetlen változata is.
+  (\kkod{unordered\textunderscore{}xxx})
+
+  \fogalom{Konténer adapterek}
+  A verem (\kkod{stack}) \zkod{FILO} típusú tároló.
+  \kkod{Interface} minden standardnak, aminek van
+  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  és \kkod{pop\textunderscore{}back()} művelete.
+  (\kkod{vector}, \kkod{deque}, \kkod{list})
+  \begin{lstlisting}
+    // stack
+    #include <stack>
+
+    stack<type, container<type>>;
+
+    empty(); push(); pop(); top(); size()
+  \end{lstlisting}
+
+  A sor (\kkod{queue}) \zkod{FIFO} típusú tároló.
+  \kkod{Interface} minden standardnak, aminek van
+  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  és \kkod{pop\textunderscore{}back()} művelete.
+  (\kkod{vector}, \kkod{deque}, \kkod{list})
+  \begin{lstlisting}
+    // queue
+    #include <queue>
+
+    queue<type, container<type>>;
+
+    empty(); push(); pop(); front(); back(); size();
+  \end{lstlisting}
+
+  A prioritásos sor (\kkod{priotity\textunderscore{}queue})
+  \kkod{interface} minden standardnak, aminek van
+  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  és \kkod{pop\textunderscore{}back()} művelete.
+  (\kkod{vector}, \kkod{deque}, \kkod{list})
+  \begin{lstlisting}
+    // queue
+    #include <queue>
+
+    queue<type, container<type>>;
+
+    empty(); push(); pop(); front(); size();
   \end{lstlisting}
 
   \end{document}
