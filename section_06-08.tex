@@ -51,7 +51,7 @@
   A választ \zkod{véges számú lépés} után mindenképpen megkapjuk.
   Egy \zkod{véges utasítássorozat}, amely bármely input esetén
   véges lépésszám után megáll, eredményt ad.
-  Minden algoritmus leírható a az alábbi logikai struktúrákkal.
+  Minden algoritmus leírható az alábbi logikai struktúrákkal:
   \begin{multicols}{3}
     \begin{itemize}
       \item rákövetkeztetés \\ (\zkod{konkatenáció})
@@ -90,7 +90,7 @@
   \section{Tétel – Adatszerkezetek} %7
   \begin{itemize}
     \item egyszerű vagy összetett alapadatok
-    rendszerének matematikai, logikai \zkod{modellje}
+    rendszerének matematikai, logikai \zkod{modell}je
 
     \item \zkod{elég jó} ahhoz, hogy tükrözze a valós kapcsolatokat
     
@@ -101,9 +101,9 @@
   \begin{itemize}
     \item lineáris, egy vagy többdimenziós
     
-    \item $n$ darab azonos típusú \zkod{adatelemből} áll
+    \item $n$ darab azonos típusú \zkod{adatelem}ből áll
     
-    \item az elemekre \zkod{indexhalmazzal} hivatkozunk
+    \item az elemekre \zkod{indexhalmaz}zal hivatkozunk
     
     \item az elemeket egymást követő memóriahelyek tárolják
 
@@ -215,7 +215,7 @@
     \item \zkod{általános fa} esetén
     nem csak 2 szukcesszor engedélyezett
     \begin{itemize}
-      \item elemek véges halmata ($\mathbf{T}$), amely \dots
+      \item elemek véges halmaza ($\mathbf{T}$), amely \dots
       \begin{itemize}
         \item[$\circ$] tartalmaz egy kitüntetett
         $\mathbf{R}$ gyökérelemet
@@ -238,7 +238,7 @@
       melyre az élköltség minimális:
       $k(\mathbf{F}) = \displaystyle\sum_{(u;v) \in \mathbf{F}} k(u;v)$
       
-      \item megoldás \zkod{Kruskal algoritmus}sal, amely Egy
+      \item megoldás \zkod{Kruskal algoritmus}sal, amely egy
       \zkod{mohó} algoritmus
       \begin{itemize}
         \item[$\circ$] minden pillanatban a leghatékonyabb megoldást válassza ki
@@ -248,7 +248,7 @@
 
   \fogalom{Verem}
   \begin{itemize}
-    \item a \zkod{verem} (\kkod{stack}) \textit{LIFO}
+    \item a \zkod{verem} (\kkod{stack}) \zkod{LIFO}
     típusú tároló.
 
     \item \kkod{push} és \kkod{pop} függvényekkel rendelkezik
@@ -256,7 +256,7 @@
 
   \fogalom{Sor}
   \begin{itemize}
-    \item a \zkod{sor} (\zkod{queue}) \textit{FIFO}
+    \item a \zkod{sor} (\kkod{queue}) \zkod{FIFO}
     típusú tároló.
 
     \item \kkod{push} és \kkod{pop} függvényekkel rendelkezik
@@ -334,7 +334,7 @@
     \item rekurzió esetén a függvényben, általában
     a visszatérésénél meghívjuk saját magát.
 
-    \item rekurzivan megoldható problémák:
+    \item rekurzívan megoldható problémák:
     \begin{itemize}
       \item a faktoriális
       \begin{lstlisting}

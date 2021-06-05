@@ -18,7 +18,7 @@
   Az osztályhoz tartozó példány (\kkod{instance}) az objektum.
   Adatszerkezetből és tagfüggvényekből áll.
   Alaphelyzetben az adattagok és a tagfüggvények
-  nem láthatóak.
+  nem láthatóak. (\kkod{data hiding})
 
 
   \fogalom{Struktúra}
@@ -119,7 +119,7 @@
   \begin{lstlisting}
     void* operator new(size_t size){
       // { ... }
-      return new typename[size];
+      return new type[size];
     }
 
     void operator delete (void* p, size_t size){
@@ -242,7 +242,7 @@
   \end{lstlisting}
   A virtuális függvények virtuálisak maradnak,
   a származtatott osztályok hierachiájában újra definiálhatjuk
-  őket a \kkod{virtul} kulcsszó nélkül. (\kkod{C++11} óta)
+  őket a \kkod{virtual} kulcsszó nélkül. (\kkod{C++11} óta)
   Újradefiniáláskor pontosan egyező függvényt kell megadni
   (név, típus, paraméterlista), egyébként túlterhelés lesz.
   A futás közben dől el, hogy melyik tagfüggvény aktivizálódik.
@@ -253,7 +253,7 @@
   \fogalom{Abstract osztály}
   Tisztán virtuális függvényt tartalmazó osztály nem példányosítható.
   Ezeket \kkod{abstract} osztályoknak hívjuk.
-  Az \kkod{interfész} olyan absztrakt osztály,
+  Az \kkod{interface} olyan absztrakt osztály,
   amely csak tisztán virtuális függvényeket tartalmaz.
 
   \fogalom{Általánosított osztályok}
@@ -296,7 +296,7 @@
   \kkod{begin()}/\kkod{rbegin()} és
   \kkod{end()}/\kkod{rend()} használatos.
   Egy pozíciót határoznak meg a tárolóban.
-  \kkod{terator}okra alkalmazható függvénysablonok:
+  \kkod{Iterator}okra alkalmazható függvénysablonok:
   \begin{lstlisting}
     begin(); end();
     advance(<int>count);
@@ -364,7 +364,7 @@
     swap(); fill(); reverse(); accumulate();  // muveletek
   \end{lstlisting}
 
-  Az allokátorobjectumok (\kkod{allocator})a tárolók számára
+  Az allokátorobjectumok (\kkod{allocator}) a tárolók számára
   lefoglalt memóriaterületet kezelik.
   \begin{lstlisting}
     // Allocator
@@ -513,7 +513,7 @@
   \fogalom{Konténer adapterek}
   A verem (\kkod{stack}) \zkod{FILO} típusú tároló.
   \kkod{Interface} minden standardnak, aminek van
-  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  \kkod{back()}, \kkod{push\textunderscore{}back()}
   és \kkod{pop\textunderscore{}back()} művelete.
   (\kkod{vector}, \kkod{deque}, \kkod{list})
   \begin{lstlisting}
@@ -527,7 +527,7 @@
 
   A sor (\kkod{queue}) \zkod{FIFO} típusú tároló.
   \kkod{Interface} minden standardnak, aminek van
-  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  \kkod{back()}, \kkod{push\textunderscore{}back()}
   és \kkod{pop\textunderscore{}back()} művelete.
   (\kkod{vector}, \kkod{deque}, \kkod{list})
   \begin{lstlisting}
@@ -541,7 +541,7 @@
 
   A prioritásos sor (\kkod{priotity\textunderscore{}queue})
   \kkod{interface} minden standardnak, aminek van
-  \kkod{back()}, \kkod{pusk\textunderscore{}back()}
+  \kkod{back()}, \kkod{push\textunderscore{}back()}
   és \kkod{pop\textunderscore{}back()} művelete.
   (\kkod{vector}, \kkod{deque}, \kkod{list})
   \begin{lstlisting}

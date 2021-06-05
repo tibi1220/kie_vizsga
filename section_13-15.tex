@@ -21,20 +21,27 @@
     megkönnyítése
 
     \item a számítógép hardver kihasználásának
-    áhatékonyabbá tétele
+    hatékonyabbá tétele
   \end{itemize}
 
   {\large \zkod{Számítógép rendszerek komponensei}:}
   \begin{itemize}
-    \item \zkod{hardver}: az alapvető számítási erőforrásokat nyújtja
-    \item \zkod{operációs rendszer}: koordinálja és vezérli
-    a hardver erőforrások különböző felhasználók különböző
-    által történő használatát
-    \item \zkod{alkalmazói programok}: definiáljá azt a módot,
-    ahogyan az egyes rendszer-erőforrásokat a felhasználók
-    számítási problémáinak megoldásához fel kell használni.
-    (fordítók, adatbázis kezelők, videó játékok, ügyviteli programok)
-    \item \zkod{felhasználók}: emberek, gépek, más számítógépek
+    \item \zkod{hardver}:
+    az alapvető számítási erőforrásokat nyújtja
+    
+    \item \zkod{operációs rendszer}:
+    koordinálja és vezérli a hardver erőforrások
+    különböző felhasználók által történő használatát
+
+    \item \zkod{alkalmazói programok}:
+    definiáljá azt a módot, ahogyan az egyes
+    rendszer-erőforrásokat a felhasználók számítási
+    problémáinak megoldásához fel kell használni.
+    (fordítók, adatbázis kezelők,
+    videó játékok, ügyviteli programok)
+
+    \item \zkod{felhasználók}:
+    emberek, gépek, más számítógépek
   \end{itemize}
 
   {\large \zkod{Komponensei}:}
@@ -43,7 +50,7 @@
   \begin{minipage}[t]{0.5\textwidth}
     \begin{itemize}
       \item folyamat kezelés
-      \item másdlagos tár kezelés
+      \item másolagos tár kezelés
       \item fájl kezelés
       \item hálózat-elérés támogatása
     \end{itemize}
@@ -101,7 +108,7 @@
   melyek közös adatterületet használnak. Ilyenkor fellép a
   \zkod{kölcsönös kizárás} igénye, hiszen adott memóriaterületet
   egyszerre csak egy \zkod{process} használhat. Ilyenkor a
-  vezérlés \zkod{szemafor segítségével történik}.
+  vezérlés \zkod{szemafor} segítségével történik.
 
   \begin{figure}[H]
     \centering
@@ -165,7 +172,7 @@
       \draw node[black, text width=6cm] at (12.5, 0.25){
         \begin{enumerate}[leftmargin=*]
            \setcounter{enumi}{4}
-          \item az erőforrás olvasása
+          \item az erőforrás írása/olvasása
           \item szemafor szabadra áll
         \end{enumerate}
       };
@@ -187,10 +194,10 @@
     \item $\mathbf{S}$ – a kölcsönös kizárást valósítja meg,
     bináris (\fkod{0-foglalt}, \fkod{1-szabad})
 
-    \item $\mathbf{TELE}$ – a tele helyek száma, nem bináris,
+    \item $\mathbf{TELE}$ – a tele helyek száma, nem bináris
     (értéke: \fkod{0\dots{}N}, kezdetben \fkod{0})
 
-    \item $\text{\textbf{ÜRES}}$ – a tele helyek száma, nem bináris,
+    \item $\text{\textbf{ÜRES}}$ – az üres helyek száma, nem bináris
     (értéke: \fkod{0\dots{}N}, kezdetben \fkod{N})
 
     \item $P$ – szemafor értékét eggyel csökkenti (\fkod{foglalttá állítás})
@@ -366,7 +373,7 @@
       \centering
       \begin{tabular}{|c|c|c|}
         \hline
-        & \fkod{érk. idő} & \fkod{CPU igény}
+        & \fkod{érk.} \fkod{idő} & \fkod{CPU igény}
         \\ \hline
         \fkod{P1} & \fkod{0} & \fkod{14} \\
         \fkod{P2} & \fkod{7} & \fkod{8} \\
@@ -446,7 +453,7 @@
   zárt körbe szervezzük, és minden folyamat egy előre
   rögzített maximális időre kapja meg a processzort,
   majd visszaáll a sor végére. Kombinálható prioritások
-  bevezetésével. (minden prioritási szintnek “saját köre“ van)
+  bevezetésével. (minden prioritási szintnek "saját köre" van)
   Előnye, hogy \zkod{egyszerű}, és \zkod {nincsen kiéheztetés}.
   Hátránya, hogy az időszeletek lejártakor a folyamat
   állapotát el kell menteni. (\zkod{időveszteség})

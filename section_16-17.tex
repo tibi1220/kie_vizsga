@@ -11,7 +11,7 @@
   egy tér- és időbeli pontból egy másikba.
   \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[scale=0.88]
+    \begin{tikzpicture}[scale=.88]
       \draw[thick, fill=yellow!20] (0 ,0) rectangle ++ (3,1)
       node[midway]{\fkod{forrás/adó}};
 
@@ -130,7 +130,7 @@
 
   \fogalom{Az információ}
   Az \zkod{információ} valamely véges számú, előre ismert esemény
-  közüé annak a megnevezése, hogy melyik következett be.
+  közül annak a megnevezése, hogy melyik következett be.
   Értéke azonos azzal a \zkod{bizonytalanság}gal, melyet megszűntet.
   
   \vspace{1em}
@@ -246,8 +246,8 @@
   szóhosszúságú kódoknak nevezzük.
   $f(A_i) = B^{(1)} \; B^{(2)} \; \dots \; B^{(\ell_i)}$
   $\mathcal{B}$-beli sorozat (kódszó) hossza: ${\ell_i}$.
-  Egy $f$ kód \zkod{átlagos szóhossza} $\ell_i$:
-  \zkod{várható értéke}
+  Egy $f$ kód \zkod{átlagos szóhossza} $\ell_i$
+  \zkod{várható értéke}:
   \begin{equation*}
     L(A) = \sum_{i=1}^n p(A_i) \cdot \ell_i =
     \sum_{i=1}^n p_i \cdot\ell_i
@@ -283,7 +283,7 @@
     
     \item \dots
     
-    \item a két legritkábban előforduló betáhöz
+    \item a két legritkábban előforduló betűhöz
     pedig azonosan hosszú kódszó fog tartozni,
     és csak az utolsó karakterben fog e két szó különbözni
   \end{itemize}
@@ -314,7 +314,7 @@
   \fogalom{Csatornakódolás}
   $\mathbb{C}^n$ vektortér, $\vb*{c} \in \mathbb{C}^n$
   és $\vb*{v} \in \mathbb{C}^n$ vektorok. A csatorna a rá
-  bocsájtptt $\vb*{c} = c^{(1)}, c^{(2)}, \dots, c^{(n)}$
+  bocsájtott $\vb*{c} = c^{(1)}, c^{(2)}, \dots, c^{(n)}$
   szimbólumsorozatból egy $\vb*{v} = v^{(1)}, v^{(2)},
   \dots, v^{(n)}$ szimbólumsorozatot csinál.
 
@@ -365,7 +365,7 @@
   {\large \zkod{Törléses hiba javítása}:}
   \vspace{.5em}
 
-  Ebben az esetben tudjuk a hibák helyét tudjuk a hibák helyét.
+  Ebben az esetben tudjuk a hibák helyét.
   A $\vb*{v}$ hibásan vett vektort abba a kódszóba javítjuk,
   amelyik a hibás pozícióktól eltekintve azonos $\vb*{v}$-vel.
   Ha több ilyen van, nem tudunk javítani.

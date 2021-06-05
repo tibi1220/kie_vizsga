@@ -3,6 +3,7 @@
 **/*.fls
 **/*.log
 **/*.out
-**/*.pdf
+**/s*.pdf
 **/*.gz
 **/*.toc
+.DS_Store

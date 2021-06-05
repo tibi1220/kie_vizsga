@@ -249,7 +249,7 @@
           muxdemux def={Lh=5, NL=4, Rh=3,
           NB=2, w=2, square pins=1}}}
         
-          \draw (0,0) node [mux 4by2] (mux1) {}
+          \draw (0,0) node [mux 4by2] (mux1) {\small\kkod{MUX}}
           
           (mux1.lpin 1) node [left=6](in1) {$D_0$}
           (mux1.lpin 2) node [left=6](in2) {$D_1$}
@@ -314,7 +314,7 @@
         muxdemux def={Lh=3, NL=1, Rh=5,
         NR=4, NB=2, w=2, square pins=1}}}
         
-        \draw (0,0) node [demux 2by4] (demux1) {}
+        \draw (0,0) node [demux 2by4] (demux1) {\small\kkod{DEMUX}}
         
         (demux1.rpin 1) node [right=6](out1) {$D_0$}
         (demux1.rpin 2) node [right=6](out2) {$D_1$}
@@ -379,7 +379,7 @@
         muxdemux def={Lh=7, NL=3, Rh=7,
         NR=8, NB=0, w=3.5, square pins=1}}}
         
-        \draw (0,0) node [decoder] (decoder1) {\small \kkod{Decoder}}
+        \draw (0,0) node [decoder] (decoder1) {\small\kkod{Decoder}}
         
         (decoder1.lpin 1) node [left](in1) {$A$}
         (decoder1.lpin 2) node [left](in2) {$B$}
@@ -508,7 +508,7 @@
     programok és azok dokumentációi
 
     \item \zkod{Firmware} \tabto{2cm} – \tabto{2.6cm}
-    célprogram, mikrokóddal írt, készülék spacifikus, \\
+    célprogram, mikrokóddal írt, készülék specifikus, \\
     \tabto{2.6cm}hardverbe ágyazott szoftver,
     gyakran \zkod{Flash ROM}
   \end{itemize}
@@ -530,7 +530,7 @@
     
     \item mikroarchitektúra  szintje
     \begin{itemize}
-      \item értelmezi a másofik szintet
+      \item értelmezi a második szintet
       \item \zkod{ALU}, regiszterek
     \end{itemize}
     
@@ -541,7 +541,7 @@
     
     \item operációs rendszer gépi szintje
     \begin{itemize}
-      \item általában értelmezésű
+      \item általában értelmezés
       \item az utasításait az oprendszer,
       vagy közvetlen a 2. szint hajtja végre
     \end{itemize}
@@ -622,7 +622,7 @@
   {\large \zkod{Buszok}:}
   \begin{itemize}
     \item a \zkod{busz}ok jellemzésére
-    az adat- és címvonalak számáz,
+    az adat- és címvonalak számát,
     az adatátvitel jellemzőit, időzítés adatait,
     a vezérlőjelek típusait, funkcióit kell megadni
 
@@ -654,7 +654,7 @@
 
   
   \fogalom{Memóriák}
-  {\large \zkod{Memória hieracrhia}:}
+  {\large \zkod{Memória hierarchia}:}
   \begin{itemize}
     \item
     regiszter \\
@@ -670,12 +670,12 @@
     \begin{itemize}
       \item cím szerinti hozzáférés
       
-      \item tartalom szerinti hozzáférés (cache)
+      \item tartalom szerinti hozzáférés (\zkod{cache})
     \end{itemize}
 
     \item hozzáférés belső szervezés alapján
     \begin{itemize}
-      \item szekvenciális Memóriák
+      \item szekvenciális memóriák
       
       \item tetszőleges sorrendben címezhető memóriák
       \begin{itemize}
@@ -770,7 +770,7 @@
       \item a szivárgás miatt rövid időn belül elveszítené a töltését,
       ezért időközönként (néhány ms) frissíteni kell a tartalmát
 
-      \item nagy integráltságú, a PC-k memóriája ilyen
+      \item nagy integráltságú, a \zkod{PC}-k memóriája ilyen
     \end{itemize}
   \end{itemize}
 
@@ -870,7 +870,7 @@
 
     \item \zkod{flag}-ek – jelzőbitek, melyek\dots
     \begin{itemize}
-      \item vagy a lehutóbb elvégzett aritmetikai
+      \item vagy a legutóbb elvégzett aritmetikai
       műveletek eredményétől függően vesznek fel értékeket,
       vagy az processzor állapotára utalnak
 
@@ -910,7 +910,7 @@
       \item a gépi utasítások \zkod{bináris jelsorozatok}
       
       \item az \zkod{assembly} nyelv a gépi utasításokat
-      \zkod{mnemoni}kkal helyettesíti
+      \zkod{mnemonik}kal helyettesíti
     \end{itemize}
 
     \item \zkod{assembly} utasítások
@@ -976,10 +976,9 @@
   \zkod{Szubrutinhívás} esetén a program máshol folytatódik.
   (alprogramra ugrunk)
   \kkod{CALL}, \kkod{RET} utasításpár.
-  ahhoz, hogy vissza tudjunk térni a megfelelő
-  helyre való visszatérést, ahhoz el kell
-  menteni a \zkod{PC} (utasításszámláló) értékét a
-  \kkod{Stack}-be (\kkod{PUSH})
+  Ahhoz, hogy vissza tudjunk térni a megfelelő helyre,
+  el kell menteni a \zkod{PC} (utasításszámláló)
+  értékét a \kkod{stack}-be (\kkod{PUSH})
 
   \fogalom{Interrupt}
   A megszakítás (\zkod{interrupt}) egy erőltetett vezérlésátadás,
@@ -1001,8 +1000,8 @@
   \fogalom{Közvetlen memória hozzáférés}
   A \zkod{DMA} (Direct Memory Access) a memória
   és egy periféria (merevlemez) közötti közvetlen
-  adatátvitel. A \zkod{DMA vezérkő} irányítja az
-  adatforgalmat, igy a \zkod{CPU} közben egy
+  adatátvitel. A \zkod{DMA vezérlő} irányítja az
+  adatforgalmat, így a \zkod{CPU} közben egy
   másik program kódját futtatja. \zkod{DMA} nélkül
   az adatokat a processzoran kellene átvezetni,
   amely nagyon időigényes lenne. Kezdetben szükség
